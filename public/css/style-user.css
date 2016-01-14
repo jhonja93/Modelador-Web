@@ -1,0 +1,273 @@
+@import url(https://fonts.googleapis.com/css?family=Candal);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+*{
+	  -webkit-appearance:none
+}
+
+body {
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  margin-top: 50px
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,.0);
+    background-color: rgba(255,255,255,.2);
+}
+
+.navbar-brand {
+  height: 40px;
+	padding: 0px 15px;
+	font-size: 18px;
+	line-height: 1em;
+	margin: 9px 0px;
+  font-family: 'Candal', sans-serif;
+}
+
+.navbar-header {
+	float: left
+}
+
+.navbar-right {
+  margin-right: 20px
+}
+
+.navbar-custom {
+	position:absolute;
+	width:auto
+}
+
+.navbar-brand h1{
+	margin-top: 0px;
+	color: #000;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 40px
+}
+
+.clear { clear:both }
+
+.user {
+	float: right;
+	display: inline-block;
+	padding: 5px 0px;
+	color: #000
+}
+
+#status {
+  font-family: "Josefin Sans";
+  font-size: 15px
+}
+
+.page-header {
+  color: #000;
+	padding-top: 9px;
+	border-top:1px solid #eeeeee;
+	font-family: "Josefin Sans";
+	font-weight:700;
+	text-transform:uppercase
+}
+
+#fotoUsuario {
+	width: 50px;
+	height: 50px
+}
+
+.column .padding {
+  	padding: 20px 0px
+}
+
+.portfolio-item {
+  	margin-bottom: 25px;
+    list-style-type: none;
+}
+
+.media-grid {
+  padding: 0px 20px
+}
+
+.thumbnail > img:last-child {
+  position: absolute;
+  margin-right: 30px;
+  margin-bottom: 50px;
+  width: 50px;
+  height: 50px;
+  bottom: 0px;
+  right: 0px
+}
+
+.toolbar {
+  	padding-top: 50px;
+}
+
+.nav-tabs > li > a {
+    color:#0E4104;
+    border-radius: 0;
+    box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4)
+}
+.nav-tabs > li.active > a,.nav-tabs > li.active > a:hover {
+    background: #F5F5F5;
+    box-shadow: inset 0 0 0 0 rgba(0,0,0,.4),-2px -3px 5px -2px rgba(0,0,0,.4)
+}
+
+.tab-content {
+  background: #F5F5F5;
+  box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4)
+}
+
+.nameDiagram {
+  color: #000;
+}
+
+.activities, .friendsList {
+  	background: rgba(255,255,255,.1);
+  	margin-top: 5px;
+  	width: 100%;
+  	height: 43%;
+  	overflow-y: auto
+}
+
+.friend {
+	 padding: 5px 10px;
+}
+
+
+/* <chat> */
+.chatButton {
+  	position: fixed;
+  	bottom: 0;
+  	right: 20px;
+  	width: 100px;
+    font-family: "Josefin Sans"
+}
+
+.chat {
+  	list-style: outside none none;
+  	margin: 0;
+    padding: 0
+}
+
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+    font-size: 11px
+}
+
+.chat li.left .chat-body {
+    margin-left: 60px
+}
+
+.chat li.right .chat-body {
+    margin-right: 60px
+}
+
+.chat li .chat-body p {
+    margin-bottom: 0;
+    color: #777777
+}
+
+.dropdown-menu {
+	 width: 300px
+}
+
+.panel-body
+{
+  overflow-y: scroll;
+  height: 300px
+}
+
+.panel-footer {
+	width: 298.5px
+}
+
+.right .chat-body p{
+	margin-top: 20px;
+	background: rgba(133,239,147,0.3)
+}
+/* </chat> */
+
+
+/* .turtle {
+	float: left;
+	height: 10%;
+  	display: flex
+} */
+
+.wrapper, .row {
+   height: 100%;
+   margin-left:0;
+   margin-right:0;
+}
+
+.wrapper:before, .wrapper:after,
+.column:before, .column:after {
+    content: "";
+    display: table;
+}
+
+.wrapper:after,
+.column:after {
+    clear: both;
+}
+
+.column {
+    height: 100%;
+    overflow: auto
+}
+
+.box {
+    bottom: 0; /* increase for footer use */
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: url(../images/bg2.jpg);
+    background-size:cover;
+    background-attachment:fixed;
+}
+
+
+#main {
+    background-color:#fefefe;
+}
+
+#sidebar {
+  height: 100%;
+  background-color:transparent;
+  color: #fff;
+  text-shadow:1px 0 1px #888888;
+  overflow-x: hidden;
+}
+
+#sidebar h5 {
+  font-family: "Josefin Sans" !important;
+  font-size: 18px;
+}
+
+#sidebar-footer {
+  position:absolute;
+  bottom:5px;
+}
+#footer {
+  margin-bottom:20px;
+}
+
+.col-sm-9.full {
+    width: 100%;
+}
+
+small.text-muted {
+  font-family:courier,courier-new,monospace;
+}
+
+footer {
+  	color: #000
+}
+

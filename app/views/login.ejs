@@ -1,0 +1,39 @@
+<!-- Modal -->
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ --><div class="modal-dialog login-form" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="form-close bounce" aria-label="Close" ><i class="fa fa-times fa-lg" dismiss="modal"></i></a>
+        <h2 class="modal-title" id="myModalLabel"><span class="fa fa-sign-in"></span> Log In</h2>
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+          <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        
+      </div>
+      <div class="modal-body">
+        <form action="/index" method="post" class="form col-md-12 center-block" id="formLogin">
+          <div class="form-group">
+            <label for="user" class="pull-left">User</label>
+            <input type="text" class="form-control input-lg" name="email" id="user" pattern="[a-z]{5,20}" autofocus="autofocus" required>
+          </div>
+          <div class="form-group">
+            <label for="password" class="pull-left">Password</label>
+            <input type="password" class="form-control input-lg" name="password" id="password" pattern="[A-Za-z0-9]{6,20}" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="botonLogin">Submit</button>
+            <p class="pull-left">Need an account? <a href="/signup">Signup</a></p>
+            <p class="pull-right">Or go <a href="/index">home</a>.</p>
+          </div>
+          </form>
+        
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button type="submit" class="btn form-close" style="background-color: rgb(222, 226, 245);" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

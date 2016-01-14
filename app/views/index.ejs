@@ -1,0 +1,77 @@
+<% include header %>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<div id="preloader">
+      <div id="load"></div>
+    </div>
+	
+	<% include navbar %>
+
+	<section id="intro" class="intro">
+      <div class="slogan  text-center">
+        <h2><%-title %></h2>
+        <h4>The best place to start your great idea.</h4>
+      </div>
+      <div class="page-scroll">
+        <a href="#login" class="btn btn-circle">
+          <i class="fa fa-angle-double-down animated"></i>
+        </a>
+      </div>
+    </section>
+
+    <section id="login" class="home-section text-center">
+    <div class="heading-about">
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="section-heading">
+            <h1>Log in <small>with</small></h1>
+            <i class="fa fa-2x fa-angle-down"></i>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="container social">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <hr class="marginbot-50">
+      </div>
+    </div>
+          <div class="logs">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-md-3">
+                  <button id="facebook" class="link facebook" target="_parent"><span class="entypo-facebook"></span></button>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-3"> 
+                  <button id="twitter" class="link twitter" target="_parent"><span class="entypo-twitter"></span></button>     
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-3">      
+                  <button id="google" class="link google-plus g-signin" target="_parent" data-clientid="595370832278-tshto7qapj4anouh8ffcuitl65fceq39.apps.googleusercontent.com" data-cookiepolicy="single_host_origin"><span class="entypo-gplus" ></span></button>   
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-3"> 
+                  <button id="espol" class="link espol" data-toggle="modal" data-target="#loginModal" target="_parent" ><span> <img src="img/tortuga.png" vspace="10" alt="Logo ESPOL"></span></button> 
+                </div>
+            </div>
+          </div>
+    </div>
+  </section>
+
+<% include footer %>
+
+<% include login %>
+
+<script src="/components/jquery/dist/jquery.min.js"></script>
+<script src="/components/bootstrap/dist/js/bootstrap.js"></script>
+
+<script src="/js/index.js"></script>
+<!-- <script src="/js/registro.js"></script> -->
+<script src="/js/facebookLogin.js"></script>
+<script src="/js/googleLogin.js"></script>
+<script src="/js/twitterLogin.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="https://apis.google.com/js/client.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
