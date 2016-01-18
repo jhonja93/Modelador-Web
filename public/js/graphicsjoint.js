@@ -22,7 +22,7 @@ newGraph.on('change:position', function(cell) {
     	// Revert the child position.
     	cell.set('position', cell.previous('position'));
   	});
-    var linkdef=new joint.dia.Link({ 
+    var linkdef=new joint.dia.Link({
         attrs: {
         '.connection': { stroke: '#3399ff', 'stroke-width': 2 },
         '.marker-target': { fill:"#FFFFFF",'stroke-width':2, stroke:"#3399ff", d:"M335,221.5h-27 M308,207.803l27.429,13.483 M308,234.77 l27.429-13.483 M307.5,208v27 M334.5,208v27 M335,221.5h10" },
@@ -39,15 +39,15 @@ newGraph.on('change:position', function(cell) {
         defaultLink: linkdef,
         snapLinks: { radius: 75 }
     });
-		paper.on('blank:pointerdblclick', function(evt, x, y) { 
-      $("#live-modal").modal('toggle');
-    	$('#createEntity').click(function(){
-        createRect(titleEntity.value,x,y);
+		paper.on('blank:pointerdblclick', function(evt, x, y) {
+      //$("#live-modal").modal('toggle');
+    	//$('#createEntity').click(function(){
+        createRect(/*titleEntity.value,*/x,y);
 
-    });
+    //});
 });
-    
-    paper.on('blank:pointerdown',function(evt, x, y) { 
+
+    paper.on('blank:pointerdown',function(evt, x, y) {
       $('#relizq').hide();
       $('#relder').hide();
 });
@@ -60,7 +60,7 @@ newGraph.on('change:position', function(cell) {
     var muchas={fill:"#FFFFFF", stroke:"#3399ff",'stroke-width':2, d:"M335,221.5h-27 M308,207.803l27.429,13.483 M308,234.77 l27.429-13.483 M307.5,208v27"};
     var cerouna={fill:"none", stroke:"#3399ff",'stroke-width':2, d:"M356.5,208v27 M366.539,221.401L356,221.5 M345.5,232.5 c5.799,0,10.5-4.701,10.5-10.5s-4.701-10.5-10.5-10.5S335,216.201,335,222S339.701,232.5,345.5,232.5z"};
     var una={fill:"none", stroke:"#3399ff",'stroke-width':2, d:"M356.5,208v27 M346,221.5h10 M366.539,221.401L356,221.5"}
-    
+
     paper.on('cell:pointerdown', function(cellView){
       $('#relizq').hide();
       $('#relder').hide();
@@ -71,46 +71,46 @@ newGraph.on('change:position', function(cell) {
       if(cellView.model.isLink()) {
         selectedLink=selected;
         $('#relizq').show();
-        $('#relder').show();       
+        $('#relder').show();
       };
-      
+
     });
     $('#im').click(function(){
           if (selectedLink) selectedLink.attr({'.marker-source':muchas});
         });
     $('#ium').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-source':unomuchas}); 
+          if (selectedLink) selectedLink.attr({'.marker-source':unomuchas});
         });
     $('#icm').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-source':ceromuchas}); 
+          if (selectedLink) selectedLink.attr({'.marker-source':ceromuchas});
         });
 
         $('#icu').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-source':cerouna}); 
+          if (selectedLink) selectedLink.attr({'.marker-source':cerouna});
         });
         $('#iu').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-source':una}); 
+          if (selectedLink) selectedLink.attr({'.marker-source':una});
         });
         $('#dum').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-target':unomuchas}); 
+          if (selectedLink) selectedLink.attr({'.marker-target':unomuchas});
         });
         $('#dcm').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-target':ceromuchas}); 
+          if (selectedLink) selectedLink.attr({'.marker-target':ceromuchas});
         });
         $('#dm').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-target':muchas}); 
+          if (selectedLink) selectedLink.attr({'.marker-target':muchas});
         });
         $('#dcu').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-target':cerouna}); 
+          if (selectedLink) selectedLink.attr({'.marker-target':cerouna});
         });
         $('#du').click(function(){
-          if (selectedLink) selectedLink.attr({'.marker-target':una}); 
+          if (selectedLink) selectedLink.attr({'.marker-target':una});
         });
     $('#removeEntity').click(function(){
-      if (selected) selected.remove(); 
+      if (selected) selected.remove();
 });
 
-function createRect(name,x,y){
+function createRect(x,y){/*name,*/
 
 	 var rect = new joint.shapes.devs.Model({
       position: { x: x, y: y },
@@ -118,17 +118,17 @@ function createRect(name,x,y){
       inPorts: ['','',''],
       outPorts: ['','',''],
       attrs: { rect: { fill: 'white' },
-      '.label':{text:''},
+      '.label':{text:'hola :)'},
        '.inPorts circle': { fill: '#16A085' },
        '.outPorts circle': { fill: '#16A085' }
      }
    });
- 
+
 
    var rectTitle = new joint.shapes.basic.Rect({
        position: { x: x, y: y },
        size: { width: 119, height: 25 },
-       attrs: { rect: { fill: 'none' } 
+       attrs: { rect: { fill: 'none' }
      }
    });
    var rect3 = new joint.shapes.basic.Rect({

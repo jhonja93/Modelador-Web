@@ -11,7 +11,7 @@
 	    <link href="/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	    <!-- Custom CSS -->
     	<link href="css/draw.css" rel="stylesheet" type="text/css">
-    	<link rel="stylesheet" type="text/css" href="public/components/jointjs/dist/joint.css" />
+    	<link rel="stylesheet" type="text/css" href="/components/jointjs/dist/joint.css" />
 	</head>
 	<body>
 		<div class="wraper">
@@ -39,7 +39,7 @@
 					            <li><a id="downloadPdf" href="#">PDf</a></li>
 					            <li><a href="#">JPG</a></li>
 					            <li role="separator" class="divider"></li>
-					            <li><a id="downloadJson" href="#">JSON</a></li>			
+					            <li><a id="downloadJson" href="#">JSON</a></li>
 					          </ul>
 					        </li>
 					      </ul>
@@ -47,11 +47,11 @@
 					        <li class="dropdown">
 					          <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Left Relation<span class="caret"></span></a>
 					          <ul class="dropdown-menu">
-					          	<li><a id="ium" href="#">One to Many</a></li>	
+					          	<li><a id="ium" href="#">One to Many</a></li>
 					            <li><a id="icm" href="#">Zero to Many</a></li>
 					            <li><a id="icu" href="#">Zero to One</a></li>
 					            <li><a id="im" href="#">Many</a></li>
-					            <li><a id="iu" href="#">Once</a></li>				
+					            <li><a id="iu" href="#">Once</a></li>
 					          </ul>
 					        </li>
 					      </ul>
@@ -59,11 +59,11 @@
 					        <li class="dropdown">
 					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Right Relation<span class="caret"></span></a>
 					          <ul class="dropdown-menu">
-					          	<li><a id="dum" href="#">One to Many</a></li>	
+					          	<li><a id="dum" href="#">One to Many</a></li>
 					            <li><a id="dcm" href="#">Zero to Many</a></li>
 					            <li><a id="dcu" href="#">Zero to One</a></li>
 					            <li><a id="dm" href="#">Many</a></li>
-					            <li><a id="du" href="#">Once</a></li>					
+					            <li><a id="du" href="#">Once</a></li>
 					          </ul>
 					        </li>
 					      </ul>
@@ -75,7 +75,7 @@
 					    </div><!-- /.navbar-collapse -->
 					  </div><!-- /.container-fluid -->
 					</nav>
-					
+
 					<div class="row column viewport-container">
 						<div id="paper" class="board full col-md-10 col-md-offset-1">
 
@@ -86,16 +86,15 @@
 
 			</div>
 		</div>
-		
-	<!-- bower:js -->
-    <script src="/components/jquery/jquery.js"></script>
-    <script src="/components/backbone/backbone.js"></script>
-    <script src="/components/lodash/lodash.js"></script>
-    <!-- endbower -->
 
-    <!-- Bootstrap Core JavaScript -->
-	<script src="js/saveSvgAsPng.js"></script>
-	<script src="js/jspdf.debug.js"></script>
-  	<script src="js/graphicsjoint.js"></script>
+	  <script src="/components/jquery/dist/jquery.js"></script>
+    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/components/lodash/lodash.js"></script>
+    <script src="/components/backbone/backbone.js"></script>
+    <script src="/components/jointjs/dist/joint.js"></script>
+    <script src="js/saveSvgAsPng.js"></script>
+    <script src="js/jspdf.debug.js"></script>
+    <script src="js/graphicsjoint.js"></script>
+
 	</body>
 </html>
