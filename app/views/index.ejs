@@ -42,16 +42,17 @@
           <div class="logs">
             <div class="row">
                 <div class="col-xs-6 col-sm-3 col-md-3">
-                  <button id="facebook" class="link facebook" target="_parent"><span class="entypo-facebook"></span></button>
+                  <a id="facebook" href="/auth/facebook" class="link facebook" target="_parent"><span class="entypo-facebook"></span></a>
+  
                 </div>
                 <div class="col-xs-6 col-sm-3 col-md-3"> 
-                  <button id="twitter" class="link twitter" target="_parent"><span class="entypo-twitter"></span></button>     
+                  <a id="twitter" href="/auth/twitter" class="link twitter" target="_parent"><span class="entypo-twitter"></span></a>     
                 </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">      
-                  <button id="google" class="link google-plus g-signin" target="_parent" data-clientid="595370832278-tshto7qapj4anouh8ffcuitl65fceq39.apps.googleusercontent.com" data-cookiepolicy="single_host_origin"><span class="entypo-gplus" ></span></button>   
+                <div class="col-xs-6 col-sm-3 col-md-3">
+                  <a id="google" href="/auth/google" class="link google-plus" target="_parent"><span class="entypo-gplus" ></span></a>   
                 </div>
                 <div class="col-xs-6 col-sm-3 col-md-3"> 
-                  <button id="espol" class="link espol" data-toggle="modal" data-target="#loginModal" target="_parent" ><span> <img src="img/tortuga.png" vspace="10" alt="Logo ESPOL"></span></button> 
+                  <a id="espol" class="link espol" style="cursor:pointer" data-toggle="modal" data-target="#loginModal" target="_parent" ><span> <img src="img/tortuga.png" vspace="10" alt="Logo ESPOL"></span></a> 
                 </div>
             </div>
           </div>
@@ -62,13 +63,13 @@
 
 <% include login %>
 
-<script src="/components/jquery/dist/jquery.min.js"></script>
+<script src="/components/jquery/jquery.js"></script>
 <script src="/components/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="/js/index.js"></script>
 <!-- <script src="/js/registro.js"></script> -->
-<script src="/js/facebookLogin.js"></script>
-<script src="/js/googleLogin.js"></script>
+<!-- <script src="/js/facebookLogin.js"></script> -->
+<!-- <script src="/js/googleLogin.js"></script> -->
 <script src="/js/twitterLogin.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
 <script src="https://apis.google.com/js/client.js"></script>

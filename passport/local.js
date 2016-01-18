@@ -1,39 +1,10 @@
-// config/passport.js
-
-// load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
-
-// load up the user model
-var User       		= require('../app/models/user'),
-    soap            = require('soap'),
-    swig            = require('swig'),
-    url             = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+var LocalStrategy       = require('passport-local').Strategy;
+var User                = require('../app/models/user'),
+    soap                = require('soap'),
+    url                 = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
-
-	// =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
-
-    // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
-
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
-
-        // User.findById(id, function(err, user) {
-        //     done(err, user);
-        // });
-    });
-
  	// =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
@@ -56,7 +27,6 @@ module.exports = function(passport) {
                 resp = result.autenticacionResult;
                 console.log(resp);
                 if (resp) {
-
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
 
@@ -81,6 +51,7 @@ module.exports = function(passport) {
                                 newUser.local.password      = newUser.generateHash(password); // use the generateHash function in our user model
                                 newUser.local.nombres       = json.NOMBRES;
                                 newUser.local.apellidos     = json.APELLIDOS;
+                                newUser.local.matricula     = json.IDENTIFICACION;
 
                                 // save the user
                                 newUser.save(function(err) {
@@ -135,10 +106,10 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
-            console.log
+            console.log (user);
             return done(null, user);
         });
 
     }));
-
 };
+

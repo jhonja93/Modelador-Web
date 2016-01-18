@@ -18,7 +18,10 @@ db.once('open', function () {
   console.info('connected to database')
 });
 
-require('./config/passport')(passport); // pass passport for configuration
+//require('./passport/init')(passport); // pass passport for configuration
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
 
 // set up our express application
 // create a write stream (in append mode)
@@ -34,24 +37,15 @@ models.forEach(function (model) {
   require(model);
 });
 
+app.use(logger('dev')); // log every request to the console
+app.use(cookieParser());
+app.use(bodyParser());
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 require('./config/express')(app, config);
-
-// required for passport
-  // app.use(session({
-  //   secret: 'ilovescotchscotchyscotchscotch',
-  //   resave: false,
-  //   saveUninitialized: true
-  // }))
-
-  
-
-// routes ======================================================================
-//require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
 app.listen(config.port, function () {

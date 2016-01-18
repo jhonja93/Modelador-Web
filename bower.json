@@ -8,6 +8,7 @@
   ],
   "dependencies": {
     "jquery": "~2.2.0",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "jointjs": "joint#~0.9.7"
   }
 }
