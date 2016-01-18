@@ -1,7 +1,7 @@
 // load all the things we need
 var facebook    = require('./facebook');
 var twitter     = require('./twitter');
-var google       = require('./google');
+var google      = require('./google');
 var local       = require('./local');
 // load up the user model
 var User        = require('../app/models/user');

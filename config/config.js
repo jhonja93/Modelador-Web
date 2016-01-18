@@ -9,7 +9,7 @@ var config = {
       name: 'drawer'
     },
     port: 3000,
-    db: 'mongodb://localhost/dbtwi'
+    db: 'mongodb://localhost/drawerdev'
   },
 
   test: {

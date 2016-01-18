@@ -56,7 +56,7 @@ module.exports = function (app) {
 
     app.get('/user/facebook', isLoggedIn, function(req, res, next) {
       res.render('user.ejs', {
-        nameUser : req.user.facebook.firstName + " " + req.user.facebook.lastName, // get the user out of session and pass to template
+        nameUser : req.user.facebook.name + " " + req.user.facebook.lastName, // get the user out of session and pass to template
         photoUser : req.user.facebook.picture
       });
     });
@@ -96,11 +96,11 @@ module.exports = function (app) {
     });
 
     app.get('/auth/google',
-      passport.authenticate('google-openidconnect', { scope: ['email', 'profile'] }));
+      passport.authenticate('google', { scope: ['email', 'profile'] }));
 
   
     app.get('/auth/google/callback', 
-      passport.authenticate('google-openidconnect', {
+      passport.authenticate('google', {
         successRedirect: '/user/google', 
         failureRedirect: '/' 
       })

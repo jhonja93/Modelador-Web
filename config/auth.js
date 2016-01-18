@@ -1,5 +1,4 @@
 // config/auth.js
-
 // expose our config directly to our application using module.exports
 module.exports = {
 
@@ -16,8 +15,8 @@ module.exports = {
 	},
 
 	'googleAuth' : {
-		'clientID' 		: '595370832278-tshto7qapj4anouh8ffcuitl65fceq39.apps.googleusercontent.com',
-		'clientSecret' 	: 'XULKBIHglpwMED5z_Rkpl_Cd',
+		'clientID' 		: '595370832278-1pje7dc8oe2012o42mjkji9ott75ep5o.apps.googleusercontent.com',
+		'clientSecret' 	: 'vGAww2iW1eVlxSdcqOVuM-e-',
 		'callbackURL' 	: 'http://127.0.0.1:3000/auth/google/callback'
 	}
 

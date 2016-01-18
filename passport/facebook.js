@@ -13,45 +13,75 @@ module.exports = function(passport) {
     },
 
     // facebook will send back the tokens and profile
-    function(access_token, refresh_token, profile, done) {
+    function(req, token, refreshToken, profile, done) {
     	
 		// asynchronous
 		process.nextTick(function() {
+			if (!req.user){
+				// find the user in the database based on their facebook id
+		        User.findOne({ 'id' : profile.id }, function(err, user) {
 
-			// find the user in the database based on their facebook id
-	        User.findOne({ 'id' : profile.id }, function(err, user) {
+		            if (err)
+		                return done(err);
 
-	        	// if there is an error, stop everything and return that
-	        	// ie an error connecting to the database
-	            if (err)
-	                return done(err);
+					// if the user is found, then log them in
+		            if (user) {
+		            	if(!user.facebook.token){
+		            		user.facebook.token 	= token;
+		            		user.facebook.name 		= profile.name.givenName;
+		            		user.facebook.lastName 	= profile.name.familyName;
+		            		user.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
+		            		user.facebook.email 	= profile.emails[0].value;
 
-				// if the user is found, then log them in
-	            if (user) {
-	                return done(null, user); // user found, return that user
-	            } else {
-	                // if there is no user found with that facebook id, create them
-	                var newUser = new User();
+		            		user.save(function(err){
+		            			if(err)
+		            				throw err;
+		            			return done(null, user);
+		            		});
+		            	}
 
-					// set all of the facebook information in our user model
-	                newUser.facebook.id    = profile.id; // set the users facebook id	                
-	                newUser.facebook.access_token = access_token; // we will save the token that facebook provides to the user	                
-	                newUser.facebook.firstName  = profile.name.givenName;
-	                newUser.facebook.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
-	                newUser.facebook.picture = 'http://graph.facebook.com/' + profile.id + '/picture';
-	                newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+		            	return done(null, user);
 
-					// save our user to the database
-	                newUser.save(function(err) {
-	                    if (err)
-	                        throw err;
+		            } else {
+		                // if there is no user found with that facebook id, create them
+		                var newUser = new User();
 
-	                    // if successful, return the new user
-	                    return done(null, newUser);
-	                });
-	            }
+						// set all of the facebook information in our user model
+		                newUser.facebook.id    		= profile.id; // set the users facebook id	                
+		                newUser.facebook.token 		= token; // we will save the token that facebook provides to the user	                
+		                newUser.facebook.name  		= profile.name.givenName;
+		                newUser.facebook.lastName 	= profile.name.familyName; // look at the passport user profile to see how names are returned
+		                newUser.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
+		                newUser.facebook.email 		= profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
-	        });
+						// save our user to the database
+		                newUser.save(function(err) {
+		                    if (err)
+		                        throw err;
+
+		                    // if successful, return the new user
+		                    return done(null, newUser);
+		                });
+		            }
+
+		        });
+			}else{
+				// user already exists and is logged in, we have to link accounts
+                var user            		= req.user; // pull the user out of the session
+
+                user.facebook.id    		= profile.id;
+                user.facebook.token 		= token;
+                user.facebook.name  		= profile.name.givenName;
+                user.facebook.lastName 		= profile.name.familyName;
+                newUser.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
+                user.facebook.email 		= profile.emails[0].value;
+
+                user.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, user);
+                });
+			}
         });
 
     }));

@@ -1,52 +1,86 @@
-var GoogleStrategy = require('passport-google-openidconnect').Strategy;
+var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../app/models/user');
 var configAuth = require('../config/auth');
 
 module.exports = function(passport) {
 
-	passport.use(new GoogleStrategy({
-		clientID		: '595370832278-tshto7qapj4anouh8ffcuitl65fceq39.apps.googleusercontent.com',
-		clienteSecret	: 'XULKBIHglpwMED5z_Rkpl_Cd',
-		callbackURL		: 'http://127.0.0.1:3000/auth/google/callback'
-	},
-	function(iss, sub, profile, accessToken, refreshToken, done) {
-		// asynchronous
-		process.nextTick(function() {
+	    // =========================================================================
+    // GOOGLE ==================================================================
+    // =========================================================================
+    passport.use(new GoogleStrategy({
 
-			// find the user in the database based on their facebook id
-	        User.findOne({ 'id' : profile.id }, function(err, user) {
+        clientID        : configAuth.googleAuth.clientID,
+        clientSecret    : configAuth.googleAuth.clientSecret,
+        callbackURL     : configAuth.googleAuth.callbackURL,
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
-	        	// if there is an error, stop everything and return that
-	        	// ie an error connecting to the database
-	            if (err)
-	                return done(err);
+    },
+    function(req, token, refreshToken, profile, done) {
 
-				// if the user is found, then log them in
-	            if (user) {
-	                return done(null, user); // user found, return that user
-	            } else {
-	                // if there is no user found with that facebook id, create them
-	                var newUser = new User();
+        // asynchronous
+        process.nextTick(function() {
 
-					// set all of the facebook information in our user model
-	                newUser.google.id    	= profile.id; // set the users facebook id	                
-	                newUser.google.token 	= token; // we will save the token that facebook provides to the user	                
-	                newUser.google.email  	= profile.email;
-	                newUser.google.name 	= profile.displayName; // look at the passport user profile to see how names are returned
-	                newUser.google.picture 	= profile.img.url;
+            // check if the user is already logged in
+            if (!req.user) {
 
-					// save our user to the database
-	                newUser.save(function(err) {
-	                    if (err)
-	                        throw err;
+                User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                    if (err)
+                        return done(err);
 
-	                    // if successful, return the new user
-	                    return done(null, newUser);
-	                });
-	            }
+                    if (user) {
+                        // if there is a user id already but no token (user was linked at one point and then removed)
+                        if (!user.google.token) {
+                            user.google.token 	= token;
+                            user.google.name  	= profile.displayName;
+                            user.google.email 	= profile.emails[0].value; // pull the first email
+                            user.google.picture = profile._json['picture'];
 
-	        });
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        }
+
+                        return done(null, user);
+                    } else {
+                        var newUser          = new User();
+
+                        newUser.google.id    = profile.id;
+                        newUser.google.token = token;
+                        newUser.google.name  = profile.displayName;
+                        newUser.google.email = profile.emails[0].value; // pull the first email
+                        newUser.google.picture = profile._json['picture'];
+
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
+
+            } else {
+                // user already exists and is logged in, we have to link accounts
+                var user               = req.user; // pull the user out of the session
+
+                user.google.id    	= profile.id;
+                user.google.token 	= token;
+                user.google.name  	= profile.displayName;
+                user.google.email 	= profile.emails[0].value; // pull the first email
+                user.google.picture	= profile._json['picture'];
+
+                user.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, user);
+                });
+
+            }
+
         });
-	}
-	))}
+
+    }));
+
+};
 
