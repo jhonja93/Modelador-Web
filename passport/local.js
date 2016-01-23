@@ -47,6 +47,7 @@ module.exports = function(passport) {
                                 console.log(result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO);
                                 var json = result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO;
 
+                                newUser.local.id     = json.IDENTIFICACION;
                                 newUser.local.email         = email;
                                 newUser.local.password      = newUser.generateHash(password); // use the generateHash function in our user model
                                 newUser.local.nombres       = json.NOMBRES;
@@ -63,12 +64,12 @@ module.exports = function(passport) {
 
                                 //response.json(result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO);
                             });
-                        });                        
+                        });
                     }
 
                     });
-                        
-                }else{ 
+
+                }else{
                 console.log('Usuario o contraseña incorrecta, intente nuevamente');
                 return done(null, false, req.flash('signupMessage', 'User or password incorrect'));
             }

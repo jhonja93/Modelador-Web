@@ -1,22 +1,24 @@
 var express   = require('express'),
     router    = express.Router(),
     User      = mongoose.model('User'),
+    Diagram   = mongoose.model('Diagram'),
     swig      = require('swig');
 
 module.exports = function (app) {
   app.use('/', router);
 
   app.get('/', isLoggedIn, function(req, res) {
+
       res.render('user.ejs', {
         nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
-        photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg"
+        photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg",
       });
     });
 
   app.get('/index', function(req, res, ne) {
       // render the page and pass in any flash data if it exists
       res.render('index.ejs', { message: req.flash('loginMessage'), title: 'DRAW-ER' });
-      
+
   });
 
   // process the login form
@@ -40,11 +42,25 @@ module.exports = function (app) {
   }));
 
   app.get('/user/local', isLoggedIn, function(req, res, next) {
+    req.session.Userid =req.user.local.id;
     res.render('user.ejs', {
       nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
       photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg"
     });
   });
+
+  app.post('/save',function(req,res){
+    // res.send(req.body.svg);
+    var newDiagram = new Diagram();
+    newDiagram.local.jdiagram= req.body.svg;
+    newDiagram.local.name = req.body.dname;
+    newDiagram.local.owner = req.session.Userid;
+    newDiagram.save(function(err){
+      if (err) throw err;
+      res.send("guardado exitoso");
+      console.log(req.session.Userid)
+    });
+  })
 
     // =====================================
     // LOGOUT ==============================
@@ -55,7 +71,10 @@ module.exports = function (app) {
     });
 
     app.get('/user/facebook', isLoggedIn, function(req, res, next) {
+      req.session.Userid =req.user.facebook.id;
+      console.log(req.user.facebook.id);
       res.render('user.ejs', {
+        id : req.user.facebook.id,
         nameUser : req.user.facebook.name + " " + req.user.facebook.lastName, // get the user out of session and pass to template
         photoUser : req.user.facebook.picture
       });
@@ -63,7 +82,7 @@ module.exports = function (app) {
 
   // route for facebook authentication and login
     // different scopes while logging in
-    app.get('/auth/facebook', 
+    app.get('/auth/facebook',
       passport.authenticate('facebook', { scope : ['email'] }
     ));
 
@@ -76,11 +95,11 @@ module.exports = function (app) {
 
     // route for twitter authentication and login
     // different scopes while logging in
-    app.get('/auth/twitter', 
+    app.get('/auth/twitter',
       passport.authenticate('twitter'));
 
     // handle the callback after facebook has authenticated the user
-    app.get('/auth/twitter/callback', 
+    app.get('/auth/twitter/callback',
       passport.authenticate('twitter', {
         successRedirect : '/user/twitter',
         failureRedirect : '/'
@@ -89,7 +108,8 @@ module.exports = function (app) {
 
     /* GET Twitter View Page */
     app.get('/user/twitter', isLoggedIn, function(req, res){
-      res.render('user.ejs', { 
+      req.session.Userid =req.user.twitter.id;
+      res.render('user.ejs', {
         nameUser: req.user.twitter.displayName,
         photoUser : req.user.twitter.picture
       });
@@ -98,23 +118,26 @@ module.exports = function (app) {
     app.get('/auth/google',
       passport.authenticate('google', { scope: ['email', 'profile'] }));
 
-  
-    app.get('/auth/google/callback', 
+
+    app.get('/auth/google/callback',
       passport.authenticate('google', {
-        successRedirect: '/user/google', 
-        failureRedirect: '/' 
+        successRedirect: '/user/google',
+        failureRedirect: '/'
       })
     );
 
     app.get('/user/google', isLoggedIn, function(req, res){
-        res.render('user.ejs', { 
+      req.session.Userid =req.user.google.id;
+        res.render('user.ejs', {
           nameUser: req.user.google.name,
           photoUser : req.user.google.picture
         });
     });
 
     app.get('/draw', isLoggedIn, function(req, res) {
-      res.render('draw.ejs')
+      res.render('draw.ejs',{
+        userId : req.session.Userid
+      })
     });
 
 
@@ -128,5 +151,5 @@ function isLoggedIn(req, res, next) {
   }
   else
     res.redirect('/index');// if they aren't redirect them to the home page
-  
+
 }

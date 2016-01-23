@@ -35,7 +35,7 @@ module.exports = function(passport) {
                             user.twitter.displayName = profile.displayName;
                             user.twitter.picture     = profile.photos[0].value;
                             user.twitter.lastStatus  = profile._json.status.text;
-                           
+
                             user.save(function(err) {
                                 if (err)
                                     throw err;

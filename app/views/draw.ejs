@@ -67,9 +67,12 @@
 					          </ul>
 					        </li>
 					      </ul>
+                <ul class="nav navbar-nav navbar-center">
+                  <li><input id="txtNombreDiagrama" type="text" style="background:#000; color:#fff;" placeholder="New_Diagram"></input></li>
+                </ul>
 					      <ul class="nav navbar-nav navbar-right">
-					      	<li><a href="#" id="removeEntity"><span class="glyphicon glyphicon-remove-sign"></span> Remove</a></li>
-					        <li><a href="#"><span class="glyphicon glyphicon-share"></span> Share</a></li>
+					      	<li><a href="#" id="removeEntity"><span class="glyphicon glyphicon-remove-sign"></span> <%-userId%> Remove</a></li>
+					        <li><a id="btnGuardar" type="button" href="#"><span class="glyphicon glyphicon-share"></span>Guardar</a></li>
 					      </ul>
 
 					    </div><!-- /.navbar-collapse -->
@@ -95,6 +98,7 @@
     <script src="js/saveSvgAsPng.js"></script>
     <script src="js/jspdf.debug.js"></script>
     <script src="js/graphicsjoint.js"></script>
+    <script src="js/guardarSVG.js"></script>
 
 	</body>
 </html>
