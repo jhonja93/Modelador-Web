@@ -24,8 +24,10 @@ Draw-ER is an Entity-Relationship drawer, you can work in real time with many us
 
 ### Who do I talk to? ###
 
-###Repo Owner
+### Repo Owner
 * Daniel Izquierdo: djizquier@gmail.com
+### Staff
+* Jhon Barreiro: jjbarrei@espol.edu.ec
 ### Other community or team contact
 * www.taws.espol.edu.ec
 * taws@espol.edu.ec
