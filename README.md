@@ -1,17 +1,17 @@
 # README #
  
-DRAW-ER
+# DRAW-ER #
 Draw-er is an Entity-Relationship drawer, you can work in real time with many users on the same diagram
 
-HOW TO INSTALL (dev mode)
-1. npm install
-2. npm install -g bower
-3. bower install
-4. gulp
-5. open browser on 127.0.0.1:3000
+#HOW TO INSTALL# (dev mode)
+*1. npm install
+*2. npm install -g bower
+*3. bower install
+*4. gulp
+*5. open browser on 127.0.0.1:3000
 
 
-* Version
+# Version#
 0.1
 
 ### How do I get set up? ###
@@ -31,8 +31,8 @@ HOW TO INSTALL (dev mode)
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-Daniel Izquierdo: djizquier@gmail.com
-* Other community or team contact
-www.taws.espol.edu.ec
-taws@espol.edu.ec
+#Repo Owner#
+*Daniel Izquierdo: djizquier@gmail.com
+# Other community or team contact#
+*www.taws.espol.edu.ec
+*taws@espol.edu.ec
