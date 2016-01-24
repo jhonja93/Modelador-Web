@@ -38,7 +38,7 @@ var userSchema = new Schema({
         name         : String,
         picture      : String
     },
-    children         : [Diagram.schema],
+    draws             : [/*{type: Schema.Types.ObjectId */Diagram.schema/*, ref: 'Diagram'}*/],
     _id              : String
 
 },{_id : false});

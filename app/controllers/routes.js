@@ -42,7 +42,7 @@ module.exports = function (app) {
   }));
 
   app.get('/user/local', isLoggedIn, function(req, res, next) {
-    req.session.Userid =req.user.local.matricula;
+    req.session.Userid =req.user._id;
     res.render('user.ejs', {
       nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
       photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg"
@@ -51,14 +51,35 @@ module.exports = function (app) {
 
   app.post('/save',function(req,res){
     // res.send(req.body.svg);
-    var newDiagram = new Diagram();
-    newDiagram.local.jdiagram= req.body.svg;
-    newDiagram.local.name = req.body.dname;
-    newDiagram.local.owner = req.session.Userid;
-    newDiagram.save(function(err){
+
+
+    console.log(req.session.Userid);
+    User.find({_id : req.session.Userid},function (err, user) {
+      if (err) return handleError(err);
+      console.log(user._id+" ;)");
+      var newDiagram = new Diagram();
+      newDiagram.local.jdiagram= req.body.svg;
+      newDiagram.local.name = req.body.dname;
+      newDiagram.local.owner = req.session.Userid;
+      user[0].draws.push(newDiagram);
+      user[0].save(function(err){
+          if (err) throw err;
+           res.send("guardado exitoso");
+        });
+      // res.send("guardado exitoso");
+      console.log(JSON.stringify(user, null, "\t"));
+});
+
+    // console.log(currentUser._id);
+    //current
+
+
+    /*newDiagram.save(function(err){
       if (err) throw err;
       res.send("guardado exitoso");
-    });
+    });*/
+
+
   })
 
     // =====================================
@@ -70,10 +91,10 @@ module.exports = function (app) {
     });
 
     app.get('/user/facebook', isLoggedIn, function(req, res, next) {
-      req.session.Userid =req.user.facebook.id;
-      console.log(req.user.facebook.id);
+      req.session.Userid =req.user._id;
+      console.log(req.user._id);
       res.render('user.ejs', {
-        id : req.user.facebook.id,
+        id : req.user._id,
         nameUser : req.user.facebook.name + " " + req.user.facebook.lastName, // get the user out of session and pass to template
         photoUser : req.user.facebook.picture
       });
@@ -107,7 +128,7 @@ module.exports = function (app) {
 
     /* GET Twitter View Page */
     app.get('/user/twitter', isLoggedIn, function(req, res){
-      req.session.Userid =req.user.twitter.id;
+      req.session.Userid =req.user_id;
       res.render('user.ejs', {
         nameUser: req.user.twitter.displayName,
         photoUser : req.user.twitter.picture
@@ -126,7 +147,7 @@ module.exports = function (app) {
     );
 
     app.get('/user/google', isLoggedIn, function(req, res){
-      req.session.Userid =req.user.google.id;
+      req.session.Userid =req.user._id;
         res.render('user.ejs', {
           nameUser: req.user.google.name,
           photoUser : req.user.google.picture
