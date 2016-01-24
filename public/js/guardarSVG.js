@@ -1,7 +1,6 @@
 $(document).ready(function() {
   $("#btnGuardar").click(function(event) {
     var dibujo = document.querySelector("svg");
-    console.log(dibujo);
     var xmls = new XMLSerializer();
     var str = xmls.serializeToString(dibujo);
     console.log(str);

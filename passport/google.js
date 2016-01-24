@@ -46,6 +46,7 @@ module.exports = function(passport) {
                     } else {
                         var newUser          = new User();
                         newUser._id    = profile.id;
+                        newUser.names   = profile.displayName;
                         // newUser.google.id    = profile.id;
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
@@ -64,6 +65,7 @@ module.exports = function(passport) {
                 // user already exists and is logged in, we have to link accounts
                 var user               = req.user; // pull the user out of the session
                 user._id      = profile.id;
+                user.names   = profile.displayName;
                 // user.google.id    	= profile.id;
                 user.google.token 	= token;
                 user.google.name  	= profile.displayName;

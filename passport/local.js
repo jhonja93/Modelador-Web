@@ -30,11 +30,10 @@ module.exports = function(passport) {
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
 
-                    User.findOne({ 'local.email' :  email }, function(err, user) {
+                    User.findOne({ 'local.username' :  email }, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
-
                     // check to see if theres already a user with that email
                     if (user) {
                         return done(null, false, req.flash('signupMessage', 'That user already exists.'));
@@ -48,7 +47,9 @@ module.exports = function(passport) {
                                 var json = result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO;
 
                                 newUser._id     = json.IDENTIFICACION;
-                                newUser.local.email         = email;
+                                newUser.names   = json.NOMBRES +" "+ json.APELLIDOS;
+                                newUser.local.username            = email;
+                                newUser.local.email         = email+"@espol.edu.ec";
                                 newUser.local.password      = newUser.generateHash(password); // use the generateHash function in our user model
                                 newUser.local.nombres       = json.NOMBRES;
                                 newUser.local.apellidos     = json.APELLIDOS;
@@ -58,7 +59,7 @@ module.exports = function(passport) {
                                 // save the user
                                 newUser.save(function(err) {
                                     if (err)
-                                        throw err;
+                                       throw err;
                                     console.log("Guardo el usuario " + newUser.local.nombres);
                                     return done(null, newUser);
                                 });

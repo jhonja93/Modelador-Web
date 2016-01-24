@@ -53,7 +53,7 @@ module.exports = function (app) {
     // res.send(req.body.svg);
 
 
-    console.log(req.session.Userid);
+    // console.log(req.session.Userid);
     User.find({_id : req.session.Userid},function (err, user) {
       if (err) return handleError(err);
       console.log(user._id+" ;)");
@@ -69,6 +69,9 @@ module.exports = function (app) {
       // res.send("guardado exitoso");
       console.log(JSON.stringify(user, null, "\t"));
 });
+  app.post('/share',function(req,res){
+
+  });
 
     // console.log(currentUser._id);
     //current

@@ -48,6 +48,7 @@ module.exports = function(passport) {
                         // if there is no user, create them
                         var newUser                 = new User();
                         newUser._id          = profile.id;
+                        newUser.names   = profile.displayName;
                         // newUser.twitter.id          = profile.id;
                         newUser.twitter.token       = token;
                         newUser.twitter.username    = profile.username;
@@ -67,6 +68,7 @@ module.exports = function(passport) {
                 // user already exists and is logged in, we have to link accounts
                 var user                 = req.user; // pull the user out of the session
                 user._id          = profile.id;
+                user.names   = profile.displayName;
                 // user.twitter.id          = profile.id;
                 user.twitter.token       = token;
                 user.twitter.username    = profile.username;

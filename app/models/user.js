@@ -10,6 +10,7 @@ var userSchema = new Schema({
     local            : {
         id           : String,
         email        : String,
+        username     : String,
         password     : String,
         nombres      : String,
         apellidos    : String,
@@ -39,6 +40,8 @@ var userSchema = new Schema({
         picture      : String
     },
     draws             : [/*{type: Schema.Types.ObjectId */Diagram.schema/*, ref: 'Diagram'}*/],
+    names            : String,
+    shareds          :[Diagram.schema],
     _id              : String
 
 },{_id : false});

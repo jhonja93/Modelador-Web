@@ -12,6 +12,12 @@
 	    <!-- Custom CSS -->
     	<link href="css/draw.css" rel="stylesheet" type="text/css">
     	<link rel="stylesheet" type="text/css" href="/components/jointjs/dist/joint.css" />
+      <script src="/components/jquery/dist/jquery.js"></script>
+      <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/components/bootstrap-list-filter/bootstrap-list-filter.src.js"></script>
+      <style>
+
+      </style>
 	</head>
 	<body>
 		<div class="wraper">
@@ -71,13 +77,40 @@
                   <li><input id="txtNombreDiagrama" type="text" style="background:#000; color:#fff;" placeholder="New_Diagram"></input></li>
                 </ul>
 					      <ul class="nav navbar-nav navbar-right">
-					      	<li><a href="#" id="removeEntity"><span class="glyphicon glyphicon-remove-sign"></span> <%-userId%> Remove</a></li>
-					        <li><a id="btnGuardar" type="button" href="#"><span class="glyphicon glyphicon-share"></span>Guardar</a></li>
+					      	<li><a type="button" href="#" id="removeEntity" class="btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span>Remove</a></li>
+                  <li><a id="btnShare" type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#modalSearch"><span class="glyphicon glyphicon-share"></span>Share</a></li>
+					        <li><a id="btnGuardar" class="btn btn-primary btn-lg" type="button" href="#"><span class="glyphicon glyphicon-save"></span>Save</a></li>
 					      </ul>
 
 					    </div><!-- /.navbar-collapse -->
 					  </div><!-- /.container-fluid -->
 					</nav>
+          <!--search User-->
+          <div id="modalSearch" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Search User</h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <input id="searchinput" class="form-control" type="search" placeholder="Share with..."/>
+                    </div>
+                    <div id="searchlist" class="list-group">
+                      <a class="list-group-item" href="#"><span>debe llenarse con sugerencias de la base</span></a>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button id="btnShareUser" type="button" class="btn btn-default" data-dismiss="modal">Share</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 					<div class="row column viewport-container">
 						<div id="paper" class="board full col-md-10 col-md-offset-1">
@@ -90,8 +123,7 @@
 			</div>
 		</div>
 
-	  <script src="/components/jquery/dist/jquery.js"></script>
-    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/searchUser.js"></script>
     <script src="/components/lodash/lodash.js"></script>
     <script src="/components/backbone/backbone.js"></script>
     <script src="/components/jointjs/dist/joint.js"></script>
