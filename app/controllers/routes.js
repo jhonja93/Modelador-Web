@@ -42,7 +42,7 @@ module.exports = function (app) {
   }));
 
   app.get('/user/local', isLoggedIn, function(req, res, next) {
-    req.session.Userid =req.user.local.id;
+    req.session.Userid =req.user.local.matricula;
     res.render('user.ejs', {
       nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
       photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg"
@@ -58,7 +58,6 @@ module.exports = function (app) {
     newDiagram.save(function(err){
       if (err) throw err;
       res.send("guardado exitoso");
-      console.log(req.session.Userid)
     });
   })
 

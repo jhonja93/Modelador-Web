@@ -23,7 +23,7 @@ module.exports = function(passport) {
             // check if the user is already logged in
             if (!req.user) {
 
-                User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+                User.findOne({ '_id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
 
@@ -47,8 +47,8 @@ module.exports = function(passport) {
                     } else {
                         // if there is no user, create them
                         var newUser                 = new User();
-
-                        newUser.twitter.id          = profile.id;
+                        newUser._id          = profile.id;
+                        // newUser.twitter.id          = profile.id;
                         newUser.twitter.token       = token;
                         newUser.twitter.username    = profile.username;
                         newUser.twitter.displayName = profile.displayName;
@@ -66,8 +66,8 @@ module.exports = function(passport) {
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user                 = req.user; // pull the user out of the session
-
-                user.twitter.id          = profile.id;
+                user._id          = profile.id;
+                // user.twitter.id          = profile.id;
                 user.twitter.token       = token;
                 user.twitter.username    = profile.username;
                 user.twitter.displayName = profile.displayName;

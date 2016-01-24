@@ -16,7 +16,7 @@ $(document).ready(function() {
           dname:txtNombreDiagrama.value}
         })
         .done(function(result) {
-          console.log(result/*"done"*/);
+          alert(result/*"done"*/);
         })
         .fail(function() {
           console.log("error");

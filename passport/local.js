@@ -47,12 +47,13 @@ module.exports = function(passport) {
                                 console.log(result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO);
                                 var json = result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO;
 
-                                newUser.local.id     = json.IDENTIFICACION;
+                                newUser._id     = json.IDENTIFICACION;
                                 newUser.local.email         = email;
                                 newUser.local.password      = newUser.generateHash(password); // use the generateHash function in our user model
                                 newUser.local.nombres       = json.NOMBRES;
                                 newUser.local.apellidos     = json.APELLIDOS;
                                 newUser.local.matricula     = json.IDENTIFICACION;
+
 
                                 // save the user
                                 newUser.save(function(err) {

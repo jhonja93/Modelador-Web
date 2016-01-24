@@ -23,7 +23,7 @@ module.exports = function(passport) {
             // check if the user is already logged in
             if (!req.user) {
 
-                User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                User.findOne({ '_id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
 
@@ -45,8 +45,8 @@ module.exports = function(passport) {
                         return done(null, user);
                     } else {
                         var newUser          = new User();
-
-                        newUser.google.id    = profile.id;
+                        newUser._id    = profile.id;
+                        // newUser.google.id    = profile.id;
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
                         newUser.google.email = profile.emails[0].value; // pull the first email
@@ -63,8 +63,8 @@ module.exports = function(passport) {
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user               = req.user; // pull the user out of the session
-
-                user.google.id    	= profile.id;
+                user._id      = profile.id;
+                // user.google.id    	= profile.id;
                 user.google.token 	= token;
                 user.google.name  	= profile.displayName;
                 user.google.email 	= profile.emails[0].value; // pull the first email

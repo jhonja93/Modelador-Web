@@ -2,7 +2,7 @@
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-
+var Diagram  = require('./diagram');
 // define the schema for our email model
 var Schema = mongoose.Schema;
 var userSchema = new Schema({
@@ -37,9 +37,11 @@ var userSchema = new Schema({
         email        : String,
         name         : String,
         picture      : String
-    }
+    },
+    children         : [Diagram.schema],
+    _id              : String
 
-});
+},{_id : false});
 
 // methods ======================
 // generating a hash
