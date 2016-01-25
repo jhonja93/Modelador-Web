@@ -1,6 +1,8 @@
 $(document).ready(function(){
-	$('#botonLogin').click(function(){
-		alert($('#user').val());
+	$('#botonLogin').on("click",function(e){
+		var div = $(".messageL").empty();
+		console.log("click");
+		e.preventDefault();
 		var request = $.ajax({
 			method: "POST",
 			url: "/auth/login",
@@ -9,11 +11,25 @@ $(document).ready(function(){
 		});
 
 		request.done(function(msg) {
-			console.log(msg.message[0]);
-			// var $div = $('<div></div>')
-			// 	 .append("<strong></strong>")
-			// 	 .append(msg);
-			// $div.insertBefore(".modal-title .title");
+			div.text(msg.message[0]);
+			div.attr("class","alert alert-danger");
 		});
 	});
+
+	$('#botonRegistrar').on("click",function(e){
+		var div = $(".messageR").empty();
+		e.preventDefault();
+		var request = $.ajax({
+			method: "POST",
+			url: "/auth/signup",
+			//dataType : "application/json",
+			data:{ user: $('#userR').val(), password: $('#passwordR').val() }
+		});
+
+		request.done(function(msg) {
+			div.text(msg.message[0]);
+			div.attr("class","alert alert-danger");
+		});
+	});
+
 });
