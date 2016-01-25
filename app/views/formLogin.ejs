@@ -4,14 +4,11 @@
     <div class="modal-content">
       <div class="modal-header" id="header">
         <a class="form-close bounce" style="cursor:pointer" aria-label="Close" data-dismiss="modal"><i class="fa fa-times fa-lg" dismiss="modal"></i></a>
-        <h2 class="modal-title title"><span class="fa fa-sign-in"></span> Log In</h2>
-        <!-- show any messages that come back with authentication -->
-        <!-- <% if (message.length > 0) { %>
-          <div class="alert al;'ert-danger"><%= message %></div>
-        <% } %> -->
+        <h2 class="modal-title titleLogin"><span class="fa fa-sign-in"></span> Log In</h2>
       </div>
+      <div class="messageL"></div>
       <div class="modal-body">
-        <form class="form col-md-12 center-block" name="formLogin">
+        <form class="form col-md-12 center-block" name="formLogin" action="/auth/login" method="post">
           <div class="form-group">
             <label for="user" class="pull-left">User</label>
             <input type="text" name="user" class="form-control input-lg" id="user" pattern="[a-z]{5,20}" autofocus="autofocus" required>
@@ -21,7 +18,7 @@
             <input type="password" name="password" class="form-control input-lg" id="password" pattern="[A-Za-z0-9]{6,20}" required>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary btn-lg btn-block" id="botonLogin">Submit</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" id="botonLogin">Submit</button>
             <p class="pull-left">Need an account? <a style="cursor:pointer" data-dismiss="modal" data-toggle="modal" data-target="#registerModal" target="_parent">Signup</a></p>
           </div>
         </form>
@@ -29,7 +26,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-12">
-          <button type="submit" class="btn form-close" style="background-color: rgb(222, 226, 245);" data-dismiss="modal" aria-hidden="true">Close</button>
+          <button class="btn form-close" style="background-color: rgb(222, 226, 245);" data-dismiss="modal" aria-hidden="true">Close</button>
         </div>
       </div>
     </div>

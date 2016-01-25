@@ -30,8 +30,9 @@ module.exports = function (app) {
       passport.authenticate('local-login', function(err, user, info) {
         if (err) return next(err);
         if (!user){
-          console.log("Se esta redireccionando");
+          //console.log("Se esta redireccionando");
           return res.send({message: req.flash('loginMessage')});
+          //return res.redirect('/index');//res.send({message: req.flash('loginMessage')});
         }
         req.logIn (user, function(err) {
           if (err) return next(err);
@@ -51,26 +52,25 @@ module.exports = function (app) {
       res.render('index.ejs', { message: req.flash('signupMessage') , title: "DRAW-ER"});
   });
 
-
-    app.post('/auth/signup', function(req, res, next) {
-    //console.log("req.body::::> " + req.body.user +" "+req.body.password);
-    passport.authenticate('local-signup', function(err, user, info) {
-      if (!user) {
-        //console.log("NO ES USUARIO DE ESPOL");
-        return res.send({message: req.flash('signupMessage')});
-      }
-      req.logIn (user, function(err) {
-        if (err) return next(err);
-        var nombre = user.local.nombres;
-        var apellido = user.local.apellidos;
-        nombre = nombre.substring(0, nombre.indexOf(" "));
-        apellido = apellido.substring(0, apellido.indexOf(" "));
-        var username = (nombre.concat(apellido)).toLowerCase();
-        username = stringController.removeDiacritics(username);
-        res.redirect('/user/local/' + username);
-      });
-    })(req, res, next);
-  });
+  app.post('/auth/signup', function(req, res, next) {
+  //console.log("req.body::::> " + req.body.user +" "+req.body.password);
+  passport.authenticate('local-signup', function(err, user, info) {
+    if (!user) {
+      console.log("NO ES USUARIO DE ESPOL");
+      return res.send({message: req.flash('signupMessage')});
+    }
+    req.logIn (user, function(err) {
+      if (err) return next(err);
+      var nombre = user.local.nombres;
+      var apellido = user.local.apellidos;
+      nombre = nombre.substring(0, nombre.indexOf(" "));
+      apellido = apellido.substring(0, apellido.indexOf(" "));
+      var username = (nombre.concat(apellido)).toLowerCase();
+      username = stringController.removeDiacritics(username);
+      res.redirect('/user/local/' + username);
+    });
+  })(req, res, next);
+});
 
 
   app.get('/user/local/*', isLoggedIn, function(req, res, next) {
