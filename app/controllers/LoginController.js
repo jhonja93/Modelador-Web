@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var stringController = require('./str/strController');
+var User  = mongoose.model('User');
 
 module.exports = function (app) {
 
@@ -157,7 +158,7 @@ module.exports = function (app) {
 
     app.get('/draw', isLoggedIn, function(req, res) {
       res.render('draw.ejs',{
-        userId : req.session.Userid
+
       })
     });
 

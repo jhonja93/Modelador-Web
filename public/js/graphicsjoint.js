@@ -210,22 +210,48 @@ $("#btnGuardar").click(function(event) {
     if (txtNombreDiagrama.value==""){
       alert("ingrese un nombre para el diagrama primero");
     }
-    else{var request = $.ajax({
+    else{
+      console.log(idDiagrama.value =="");
+      if(idDiagrama.value==""){
+        var request = $.ajax({
           method: "POST",
           url: "/save",
           //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
          data: {svg: json,
-          dname:txtNombreDiagrama.value}
+          dname:txtNombreDiagrama.value,dId:""}
         })
         .done(function(result) {
-          alert(result/*"done"*/);
+          alert(result.message/*"done"*/);
+          idDiagrama.innerHTML=result.idDiagram;
         })
         .fail(function() {
           console.log("error");
         })
         .always(function() {
           console.log("complete");
-        });}
+        });
+      }
+      else{
+        console.log("entor al else cliente")
+        var request = $.ajax({
+          method: "POST",
+          url: "/save",
+          //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+         data: {svg: json,
+          dname:txtNombreDiagrama.value,dId:idDiagrama.value}
+        })
+        .done(function(result) {
+          alert(result.message/*"done"*/);
+          idDiagrama.innerHTML=result.idDiagram;
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+      }
+    }
 
   });
 

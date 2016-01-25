@@ -1,4 +1,4 @@
-$('#searchlist').btsListFilter('#searchinput',{itemChild:'span'});
+//$('#searchlist').btsListFilter('#searchinput',{itemChild:'span'});
 
 $('#btnShareUser').click(function(event) {
 
