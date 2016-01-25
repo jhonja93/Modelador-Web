@@ -10,9 +10,18 @@ $(document).ready(function(){
 			data:{ user: $('#user').val(), password: $('#password').val() }
 		});
 
-		request.done(function(msg) {
-			div.text(msg.message[0]);
-			div.attr("class","alert alert-danger");
+		request.done(function(json) {
+			if(json.message != undefined){
+				console.log(json.message);
+				alert(json.message);
+			}else{
+				window.location.href = "/user/local/"+json.user;
+			}
+
+			//var json = JSON.stringify(msg);
+			//console.log(json);
+  		// div.text(json.message);
+			// div.attr("class","alert alert-danger");
 		});
 	});
 
@@ -26,9 +35,13 @@ $(document).ready(function(){
 			data:{ user: $('#userR').val(), password: $('#passwordR').val() }
 		});
 
-		request.done(function(msg) {
-			div.text(msg.message[0]);
-			div.attr("class","alert alert-danger");
+		request.done(function(json) {
+			if(json.message != undefined){
+				console.log(json.message);
+				alert(json.message);
+			}else{
+				window.location.href = "/user/local/"+json.user;
+			}
 		});
 	});
 

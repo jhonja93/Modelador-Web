@@ -31,7 +31,7 @@ module.exports = function (app) {
         if (err) return next(err);
         if (!user){
           //console.log("Se esta redireccionando");
-          return res.send({message: req.flash('loginMessage')});
+          return res.json({message: req.flash('loginMessage')});
           //return res.redirect('/index');//res.send({message: req.flash('loginMessage')});
         }
         req.logIn (user, function(err) {
@@ -41,7 +41,8 @@ module.exports = function (app) {
           nombre = nombre.substring(0, nombre.indexOf(" "));
           apellido = apellido.substring(0, apellido.indexOf(" "));
           var username = (nombre.concat(apellido)).toLowerCase();
-          res.redirect('/user/local/' + username);
+          return res.json({user: username});
+          //res.redirect('/user/local/' + username);
         });
       })(req, res, next);
     });
@@ -57,7 +58,7 @@ module.exports = function (app) {
   passport.authenticate('local-signup', function(err, user, info) {
     if (!user) {
       console.log("NO ES USUARIO DE ESPOL");
-      return res.send({message: req.flash('signupMessage')});
+      return res.json({message: req.flash('signupMessage')});
     }
     req.logIn (user, function(err) {
       if (err) return next(err);
@@ -67,7 +68,8 @@ module.exports = function (app) {
       apellido = apellido.substring(0, apellido.indexOf(" "));
       var username = (nombre.concat(apellido)).toLowerCase();
       username = stringController.removeDiacritics(username);
-      res.redirect('/user/local/' + username);
+      return res.json({user: username});
+      //res.redirect('/user/local/' + username);
     });
   })(req, res, next);
 });
