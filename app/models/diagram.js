@@ -4,13 +4,12 @@ var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our email model
 var Schema = mongoose.Schema;
 var diagramSchema = new Schema({
-    local:{
-        jdiagram:   String,
-        name:       String,
-        owner:      String,
-        parent:     String,
-        date:       {type: Date, default:Date.now}
-    }
+
+    jdiagram:   String,
+    name:       String,
+    owner:      String,
+    parent:     String,
+    date:       {type: Date, default:Date.now}
 });
 
 

@@ -9,7 +9,7 @@ var userSchema = new Schema({
 
     local            : {
         id           : String,
-        user         : String,
+        email         : String,
         username     : String,
         password     : String,
         nombres      : String,

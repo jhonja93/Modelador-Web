@@ -203,6 +203,33 @@ var fileName =  'diagrama.json'; // You can use the .txt extension if you want
      downloadJson.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(json));
 
  }
+
+
+$("#btnGuardar").click(function(event) {
+  var json=JSON.stringify(newGraph);
+    if (txtNombreDiagrama.value==""){
+      alert("ingrese un nombre para el diagrama primero");
+    }
+    else{var request = $.ajax({
+          method: "POST",
+          url: "/save",
+          //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+         data: {svg: json,
+          dname:txtNombreDiagrama.value}
+        })
+        .done(function(result) {
+          alert(result/*"done"*/);
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });}
+
+  });
+
+
 $('#downloadJson').click(function(){
     downloadAsJson(fileName);
 });

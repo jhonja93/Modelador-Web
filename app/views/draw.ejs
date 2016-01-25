@@ -1,93 +1,93 @@
  <!DOCTYPE html>
 <html lang="es">
 
-	<head>
-		<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="description" content="">
-	    <meta name="author" content="Daniel Izquierdo and Jhon Barreiro">
-	    <title>DRAW-ER</title>
-	    <!-- Bootstrap Core CSS -->
-	    <link href="/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	    <!-- Custom CSS -->
-    	<link href="css/draw.css" rel="stylesheet" type="text/css">
-    	<link rel="stylesheet" type="text/css" href="/components/jointjs/dist/joint.css" />
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="Daniel Izquierdo and Jhon Barreiro">
+      <title>DRAW-ER</title>
+      <!-- Bootstrap Core CSS -->
+      <link href="/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <!-- Custom CSS -->
+      <link href="css/draw.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" type="text/css" href="/components/jointjs/dist/joint.css" />
       <script src="/components/jquery/dist/jquery.js"></script>
       <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="/components/bootstrap-list-filter/bootstrap-list-filter.src.js"></script>
       <style>
 
       </style>
-	</head>
-	<body>
-		<div class="wraper">
-			<div class="box">
-				<div class="row">
-					<nav class="navbar navbar-default navbar-fixed-top">
-						<div class="container-fluid">
-					 		<!-- Brand and toggle get grouped for better mobile display -->
-						    <div class="navbar-header">
-						    	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						    		<span class="sr-only">Toggle navigation</span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							    </button>
-						      	<a class="navbar-brand" href="#">DRAW-ER</a>
-						    </div>
+  </head>
+  <body>
+    <div class="wraper">
+      <div class="box">
+        <div class="row">
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                    <a class="navbar-brand" href="#">DRAW-ER</a>
+                </div>
 
-					    <!-- Collect the nav links, forms, and other content for toggling -->
-					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					      <ul class="nav navbar-nav">
-					        <li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Download as<span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					            <li><a id="downloadPdf" href="#">PDf</a></li>
-					            <li><a href="#">JPG</a></li>
-					            <li role="separator" class="divider"></li>
-					            <li><a id="downloadJson" href="#">JSON</a></li>
-					          </ul>
-					        </li>
-					      </ul>
-					      <ul id="relizq" class="nav navbar-nav">
-					        <li class="dropdown">
-					          <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Left Relation<span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					          	<li><a id="ium" href="#">One to Many</a></li>
-					            <li><a id="icm" href="#">Zero to Many</a></li>
-					            <li><a id="icu" href="#">Zero to One</a></li>
-					            <li><a id="im" href="#">Many</a></li>
-					            <li><a id="iu" href="#">Once</a></li>
-					          </ul>
-					        </li>
-					      </ul>
-					      <ul id="relder" class="nav navbar-nav">
-					        <li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Right Relation<span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					          	<li><a id="dum" href="#">One to Many</a></li>
-					            <li><a id="dcm" href="#">Zero to Many</a></li>
-					            <li><a id="dcu" href="#">Zero to One</a></li>
-					            <li><a id="dm" href="#">Many</a></li>
-					            <li><a id="du" href="#">Once</a></li>
-					          </ul>
-					        </li>
-					      </ul>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Download as<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a id="downloadPdf" href="#">PDf</a></li>
+                      <li><a href="#">JPG</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a id="downloadJson" href="#">JSON</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul id="relizq" class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Left Relation<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a id="ium" href="#">One to Many</a></li>
+                      <li><a id="icm" href="#">Zero to Many</a></li>
+                      <li><a id="icu" href="#">Zero to One</a></li>
+                      <li><a id="im" href="#">Many</a></li>
+                      <li><a id="iu" href="#">Once</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul id="relder" class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Right Relation<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a id="dum" href="#">One to Many</a></li>
+                      <li><a id="dcm" href="#">Zero to Many</a></li>
+                      <li><a id="dcu" href="#">Zero to One</a></li>
+                      <li><a id="dm" href="#">Many</a></li>
+                      <li><a id="du" href="#">Once</a></li>
+                    </ul>
+                  </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-center">
                   <li><input id="txtNombreDiagrama" type="text" style="background:#000; color:#fff;" placeholder="New_Diagram"></input></li>
                 </ul>
-					      <ul class="nav navbar-nav navbar-right">
-					      	<li><a type="button" href="#" id="removeEntity" class="btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span>Remove</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a type="button" href="#" id="removeEntity" class="btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span>Remove</a></li>
                   <li><a id="btnShare" type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#modalSearch"><span class="glyphicon glyphicon-share"></span>Share</a></li>
-					        <li><a id="btnGuardar" class="btn btn-primary btn-lg" type="button" href="#"><span class="glyphicon glyphicon-save"></span>Save</a></li>
-					      </ul>
+                  <li><a id="btnGuardar" class="btn btn-primary btn-lg" type="button" href="#"><span class="glyphicon glyphicon-save"></span>Save</a></li>
+                </ul>
 
-					    </div><!-- /.navbar-collapse -->
-					  </div><!-- /.container-fluid -->
-					</nav>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
           <!--search User-->
           <div id="modalSearch" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog" role="document">
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
@@ -97,31 +97,34 @@
                 <div class="modal-body">
                   <form role="form">
                     <div class="form-group">
-                      <input id="searchinput" class="form-control" type="search" placeholder="Share with..."/>
+                      <label for="searchinput"><span class="glyphicon glyphicon-user"></span> User</label>
+                      <input id="searchinput" type="text" class="form-control"  autofocus="autofocus" placeholder="Share with..." required/>
                     </div>
                     <div id="searchlist" class="list-group">
                       <a class="list-group-item" href="#"><span>debe llenarse con sugerencias de la base</span></a>
                     </div>
+                    <button id="btnShareUser" type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-share"  data-dismiss="modal"></span> Share</button>
                   </form>
                 </div>
+
                 <div class="modal-footer">
-                <button id="btnShareUser" type="button" class="btn btn-default" data-dismiss="modal">Share</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                  <button type="submit" class="btn btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
                 </div>
               </div>
             </div>
           </div>
 
-					<div class="row column viewport-container">
-						<div id="paper" class="board full col-md-10 col-md-offset-1">
+          <div class="row column viewport-container">
+            <div id="paper" class="board full col-md-10 col-md-offset-1">
 
-						</div>
-					</div>
-				</div>
+            </div>
+          </div>
+        </div>
 
 
-			</div>
-		</div>
+      </div>
+    </div>
 
     <script src="js/searchUser.js"></script>
     <script src="/components/lodash/lodash.js"></script>
@@ -130,7 +133,6 @@
     <script src="js/saveSvgAsPng.js"></script>
     <script src="js/jspdf.debug.js"></script>
     <script src="js/graphicsjoint.js"></script>
-    <script src="js/guardarSVG.js"></script>
 
-	</body>
+  </body>
 </html>
