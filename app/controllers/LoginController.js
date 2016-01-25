@@ -31,7 +31,7 @@ module.exports = function (app) {
         if (err) return next(err);
         if (!user){
           console.log("Se esta redireccionando");
-          return res.redirect('/index');//res.send({message: req.flash('loginMessage')});
+          return res.send({message: req.flash('loginMessage')});
         }
         req.logIn (user, function(err) {
           if (err) return next(err);
@@ -51,19 +51,13 @@ module.exports = function (app) {
       res.render('index.ejs', { message: req.flash('signupMessage') , title: "DRAW-ER"});
   });
 
-    // process the signup form
-  // app.post('/auth/signup', passport.authenticate('local-signup', {
-  //     successRedirect : '/user/local/', // redirect to the secure profile section
-  //     failureRedirect : '/signup', // redirect back to the signup page if there is an error
-  //     failureFlash : true // allow flash messages
-  // }));
 
     app.post('/auth/signup', function(req, res, next) {
     //console.log("req.body::::> " + req.body.user +" "+req.body.password);
     passport.authenticate('local-signup', function(err, user, info) {
       if (!user) {
-        console.log("NO ES USUARIO DE ESPOL");
-        return res.redirect('/signup');
+        //console.log("NO ES USUARIO DE ESPOL");
+        return res.send({message: req.flash('signupMessage')});
       }
       req.logIn (user, function(err) {
         if (err) return next(err);
