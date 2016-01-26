@@ -11,19 +11,19 @@ module.exports = function (app) {
               console.log(c);
               req.session.CountDiagrDb = c;});
         User.find({_id : req.session.Userid},function (err, user) {
-      if (err) return handleError(err);
-      // console.log(req.session.Userid+" ;)");
-      var newDiagram = new Diagram();
-      newDiagram.owner = req.session.Userid;
-      // console.log(req.session.CountDiagrDb  +" ;)");
-      req.session.CountDiagrDb=req.session.CountDiagrDb+1;
-      newDiagram._id= req.session.CountDiagrDb;
-      // console.log(req.session.Userid+" ;)");
-      newDiagram.jdiagram= req.body.svg;
-      newDiagram.name = req.body.dname;
-      user[0].draws.push(newDiagram);
-      user[0].save(function(err){
-          if (err) throw err;
+		      if (err) return handleError(err);
+		      // console.log(req.session.Userid+" ;)");
+		      var newDiagram = new Diagram();
+		      newDiagram.owner = req.session.Userid;
+		      // console.log(req.session.CountDiagrDb  +" ;)");
+		      req.session.CountDiagrDb=req.session.CountDiagrDb+1;
+		      newDiagram._id= req.session.CountDiagrDb;
+		      // console.log(req.session.Userid+" ;)");
+		      newDiagram.jdiagram= req.body.svg;
+		      newDiagram.name = req.body.dname;
+		      user[0].draws.push(newDiagram._id);
+		      user[0].save(function(err){
+		          if (err) throw err;
 
 
         });
@@ -37,9 +37,10 @@ module.exports = function (app) {
 
     }
     else{
+
       Diagram.update({_id: req.body.dId},{$set:{jdiagram:req.body.svg,name:req.body.dname}},function(err,numAffected){
         if (err) throw err;
-        res.json({message:"diagrama Actualizado",idDiagram:req.body.dId});
+        res.json({message:"Diagrama Actualizado",idDiagram:req.body.dId});
       });
     }
 

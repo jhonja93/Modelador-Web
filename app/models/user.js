@@ -39,9 +39,9 @@ var userSchema = new Schema({
         name         : String,
         picture      : String
     },
-    draws             : [/*{type: Schema.Types.ObjectId */Diagram.schema/*, ref: 'Diagram'}*/],
+    draws             : [], //ids de diagramas propios
     names            : String,
-    shareds          :[Diagram.schema],
+    shareds          :[], //ids de diagramas que me han compartido
     _id              : String
 
 },{_id : false});

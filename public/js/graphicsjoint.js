@@ -1,3 +1,4 @@
+$(document).ready(function(){
 $('#relizq').hide();
 $('#relder').hide();
 newGraph=new joint.dia.Graph();
@@ -207,12 +208,15 @@ var fileName =  'diagrama.json'; // You can use the .txt extension if you want
 
 $("#btnGuardar").click(function(event) {
   var json=JSON.stringify(newGraph);
+  var idD= idDiagrama.innerHTML;
+    console.log(txtNombreDiagrama.value);
+    console.log("imprimir id de Diagrama: ")
+    console.log(idD);
     if (txtNombreDiagrama.value==""){
       alert("ingrese un nombre para el diagrama primero");
     }
     else{
-      console.log(idDiagrama.value =="");
-      if(idDiagrama.value==""){
+      if(idD==""){
         var request = $.ajax({
           method: "POST",
           url: "/save",
@@ -238,7 +242,7 @@ $("#btnGuardar").click(function(event) {
           url: "/save",
           //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
          data: {svg: json,
-          dname:txtNombreDiagrama.value,dId:idDiagrama.value}
+          dname:txtNombreDiagrama.value,dId:idD}
         })
         .done(function(result) {
           alert(result.message/*"done"*/);
@@ -264,4 +268,5 @@ $('#downloadPdf').click(function(){
     svg_to_pdf(document.querySelector("svg"), function (pdf) {
                 download_pdf('SVG.pdf', pdf.output('dataurlstring'));
             });
+});
 });

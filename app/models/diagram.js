@@ -8,6 +8,7 @@ var diagramSchema = new Schema({
     name:       String,
     owner:      String,
     parent:     String,
+    sharedWith: [],
     date:       {type: Date, default:Date.now},
     _id:        String
 },{_id : false});

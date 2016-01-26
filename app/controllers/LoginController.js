@@ -130,7 +130,8 @@ module.exports = function (app) {
 
     /* GET Twitter View Page */
     app.get('/user/twitter', isLoggedIn, function(req, res){
-      req.session.Userid =req.user_id;
+      req.session.Userid =req.user._id;
+      console.log(req.user._id);
       res.render('user.ejs', {
         nameUser: req.user.twitter.displayName,
         photoUser : req.user.twitter.picture
