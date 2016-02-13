@@ -42,12 +42,15 @@ module.exports = function(passport) {
 
                                 newUser._id                 = json.IDENTIFICACION;
                                 newUser.names               = json.NOMBRES +" "+ json.APELLIDOS;
+                                newUser.picture             = "https://www.academico.espol.edu.ec/imgEstudiante/" + json.matricula + ".jpg"
+
                                 newUser.local.username      = user;
                                 newUser.local.email          = user+"@espol.edu.ec";
                                 newUser.local.password      = newUser.generateHash(password); // use the generateHash function in our user model
                                 newUser.local.nombres       = json.NOMBRES;
                                 newUser.local.apellidos     = json.APELLIDOS;
                                 newUser.local.matricula     = json.IDENTIFICACION;
+                                newUser.local.picture       = "https://www.academico.espol.edu.ec/imgEstudiante/" + json.matricula + ".jpg"
 
 
                                 // save the user
@@ -115,4 +118,3 @@ module.exports = function(passport) {
 
     }));
 };
-

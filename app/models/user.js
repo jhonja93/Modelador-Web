@@ -39,10 +39,12 @@ var userSchema = new Schema({
         name         : String,
         picture      : String
     },
-    draws             : [], //ids de diagramas propios
+    _id              : String,
     names            : String,
-    shareds          :[], //ids de diagramas que me han compartido
-    _id              : String
+    picture          : String,
+    draws            : [], //ids de diagramas propios
+    shareds          :[] //ids de diagramas que me han compartido
+
 
 },{_id : false});
 

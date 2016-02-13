@@ -2,21 +2,28 @@ var express = require('express');
 var router = express.Router();
 var stringController = require('./str/strController');
 var User  = mongoose.model('User');
+var Title = 'DRAW-ER';
 
 module.exports = function (app) {
 
   app.get('/', isLoggedIn, function(req, res) {
 
       res.render('user.ejs', {
-        nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
-        photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg",
+        nameUser : req.user.names, // get the user out of session and pass to template
+        photoUser : req.user.picture
       });
     });
 
   app.get('/index', function(req, res, ne) {
+    if (req.isAuthenticated()){
+      res.render('user.ejs',{
+        nameUser: req.user.names,
+        photoUser: req.user.picture
+      });
+    }else{
       // render the page and pass in any flash data if it exists
-      res.render('index.ejs', { message: req.flash('loginMessage'), title: 'DRAW-ER' });
-
+      res.render('index.ejs', { message: req.flash('loginMessage'), title: Title });
+    }
   });
 
   // process the login form
@@ -27,7 +34,7 @@ module.exports = function (app) {
   // }));
 
   app.post('/auth/login', function(req, res, next) {
-      console.log("req.body::::> " + req.body.user + req.body.password);
+      //console.log("req.body::::> " + req.body.user + req.body.password);
       passport.authenticate('local-login', function(err, user, info) {
         if (err) return next(err);
         if (!user){
@@ -51,7 +58,7 @@ module.exports = function (app) {
 
   app.get('/signup', function(req, res) {
       // render the page and pass in any flash data if it exists
-      res.render('index.ejs', { message: req.flash('signupMessage') , title: "DRAW-ER"});
+      res.render('index.ejs', { message: req.flash('signupMessage') , title: Title});
   });
 
   app.post('/auth/signup', function(req, res, next) {
@@ -76,11 +83,11 @@ module.exports = function (app) {
 });
 
 
-  app.get('/user/local/*', isLoggedIn, function(req, res, next) {
+  app.get('/user/*', isLoggedIn, function(req, res, next) {
     req.session.Userid =req.user._id;
     res.render('user.ejs', {
-      nameUser : req.user.local.nombres + " " + req.user.local.apellidos, // get the user out of session and pass to template
-      photoUser : "https://www.academico.espol.edu.ec/imgEstudiante/" + req.user.local.matricula + ".jpg"
+      nameUser : req.user.names, // get the user out of session and pass to template
+      photoUser : req.user.picture
     });
   });
 
@@ -90,16 +97,6 @@ module.exports = function (app) {
     app.get('/logout', function(req, res) {
       req.logout();
       res.redirect('/');
-    });
-
-    app.get('/user/facebook', isLoggedIn, function(req, res, next) {
-      req.session.Userid =req.user._id;
-      console.log(req.user._id);
-      res.render('user.ejs', {
-        id : req.user._id,
-        nameUser : req.user.facebook.name + " " + req.user.facebook.lastName, // get the user out of session and pass to template
-        photoUser : req.user.facebook.picture
-      });
     });
 
   // route for facebook authentication and login
@@ -115,6 +112,16 @@ module.exports = function (app) {
       })
     );
 
+    // app.get('/user/facebook', isLoggedIn, function(req, res, next) {
+    //   req.session.Userid =req.user._id;
+    //   console.log(req.user._id);
+    //   res.render('user.ejs', {
+    //     id : req.user._id,
+    //     nameUser : req.user.facebook.name + " " + req.user.facebook.lastName, // get the user out of session and pass to template
+    //     photoUser : req.user.facebook.picture
+    //   });
+    // });
+
     // route for twitter authentication and login
     // different scopes while logging in
     app.get('/auth/twitter',
@@ -129,14 +136,14 @@ module.exports = function (app) {
     );
 
     /* GET Twitter View Page */
-    app.get('/user/twitter', isLoggedIn, function(req, res){
-      req.session.Userid =req.user._id;
-      console.log(req.user._id);
-      res.render('user.ejs', {
-        nameUser: req.user.twitter.displayName,
-        photoUser : req.user.twitter.picture
-      });
-    });
+    // app.get('/user/twitter', isLoggedIn, function(req, res){
+    //   req.session.Userid =req.user._id;
+    //   console.log(req.user._id);
+    //   res.render('user.ejs', {
+    //     nameUser: req.user.twitter.displayName,
+    //     photoUser : req.user.twitter.picture
+    //   });
+    // });
 
     app.get('/auth/google',
       passport.authenticate('google', { scope: ['email', 'profile'] }));
@@ -149,13 +156,13 @@ module.exports = function (app) {
       })
     );
 
-    app.get('/user/google', isLoggedIn, function(req, res){
-      req.session.Userid =req.user._id;
-        res.render('user.ejs', {
-          nameUser: req.user.google.name,
-          photoUser : req.user.google.picture
-        });
-    });
+    // app.get('/user/google', isLoggedIn, function(req, res){
+    //   req.session.Userid =req.user._id;
+    //     res.render('user.ejs', {
+    //       nameUser: req.user.google.name,
+    //       photoUser : req.user.google.picture
+    //     });
+    // });
 
     app.get('/draw', isLoggedIn, function(req, res) {
       res.render('draw.ejs',{

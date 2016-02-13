@@ -27,11 +27,16 @@ module.exports = function(passport) {
 					// if the user is found, then log them in
 		            if (user) {
 		            	if(!user.facebook.token){
-		            		user.facebook.token 	= token;
-		            		user.facebook.name 		= profile.name.givenName;
-		            		user.facebook.lastName 	= profile.name.familyName;
-		            		user.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
-		            		user.facebook.email 	= profile.emails[0].value;
+                    user._id               = profile.id;
+                    user.names             = profile.name.givenName +" "+ profile.name.familyName;
+                    user.picture           = 'http://graph.facebook.com/' + profile.id + '/picture';
+
+                    user.facebook.id    		= profile.id;
+		            		user.facebook.token 	   = token;
+		            		user.facebook.name 		   = profile.name.givenName;
+		            		user.facebook.lastName 	 = profile.name.familyName;
+		            		user.facebook.picture 	 = 'http://graph.facebook.com/' + profile.id + '/picture';
+		            		user.facebook.email 	   = profile.emails[0].value;
 
 		            		user.save(function(err){
 		            			if(err)
@@ -48,12 +53,13 @@ module.exports = function(passport) {
 
 						// set all of the facebook information in our user model
 		                newUser._id               = profile.id;
-                    newUser.names   = profile.name.givenName +" "+ profile.name.familyName;
-                    // newUser.facebook.id    		= profile.id; // set the users facebook id
+                    newUser.names             = profile.name.givenName +" "+ profile.name.familyName;
+                    newUser.picture           = 'http://graph.facebook.com/' + profile.id + '/picture';
 
+                    newUser.facebook.id    		= profile.id; // set the users facebook id
 		                newUser.facebook.token 		= token; // we will save the token that facebook provides to the user
 		                newUser.facebook.name  		= profile.name.givenName;
-		                newUser.facebook.lastName 	= profile.name.familyName; // look at the passport user profile to see how names are returned
+		                newUser.facebook.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
 		                newUser.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
 		                newUser.facebook.email 		= profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
@@ -72,12 +78,13 @@ module.exports = function(passport) {
 				// user already exists and is logged in, we have to link accounts
                 var user            		= req.user; // pull the user out of the session
                 user._id                = profile.id;
-                user.names   = profile.name.givenName +" "+ profile.name.familyName;
+                user.names              = profile.name.givenName +" "+ profile.name.familyName;
+                user.picture            = 'http://graph.facebook.com/' + profile.id + '/picture';
                 // user.facebook.id    		= profile.id;
                 user.facebook.token 		= token;
                 user.facebook.name  		= profile.name.givenName;
-                user.facebook.lastName 		= profile.name.familyName;
-                newUser.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
+                user.facebook.lastName 	= profile.name.familyName;
+                user.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
                 user.facebook.email 		= profile.emails[0].value;
 
                 user.save(function(err) {

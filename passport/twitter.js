@@ -30,6 +30,11 @@ module.exports = function(passport) {
                     if (user) {
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.twitter.token) {
+                            username._id                 = profile.id;
+                            user.names               = profile.displayName;
+                            user.picture             = profile.photos[0].value;
+
+                            user.twitter.id          = profile.id;
                             user.twitter.token       = token;
                             user.twitter.username    = profile.username;
                             user.twitter.displayName = profile.displayName;
@@ -47,9 +52,11 @@ module.exports = function(passport) {
                     } else {
                         // if there is no user, create them
                         var newUser                 = new User();
-                        newUser._id          = profile.id;
-                        newUser.names   = profile.displayName;
-                        // newUser.twitter.id          = profile.id;
+                        newUser._id                 = profile.id;
+                        newUser.names               = profile.displayName;
+                        newUser.picture             = profile.photos[0].value;
+
+                        newUser.twitter.id          = profile.id;
                         newUser.twitter.token       = token;
                         newUser.twitter.username    = profile.username;
                         newUser.twitter.displayName = profile.displayName;
@@ -66,15 +73,17 @@ module.exports = function(passport) {
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var user                 = req.user; // pull the user out of the session
-                user._id          = profile.id;
-                user.names   = profile.displayName;
-                // user.twitter.id          = profile.id;
-                user.twitter.token       = token;
-                user.twitter.username    = profile.username;
-                user.twitter.displayName = profile.displayName;
-                user.twitter.picture     = profile.photos[0].value;
-                user.twitter.lastStatus  = profile._json.status.text;
+                var user                  = req.user; // pull the user out of the session
+                user._id                  = profile.id;
+                user.names                = profile.displayName;
+                user.picture              = profile.photos[0].value;
+
+                user.twitter.id           = profile.id;
+                user.twitter.token        = token;
+                user.twitter.username     = profile.username;
+                user.twitter.displayName  = profile.displayName;
+                user.twitter.picture      = profile.photos[0].value;
+                user.twitter.lastStatus   = profile._json.status.text;
 
                 user.save(function(err) {
                     if (err)

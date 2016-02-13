@@ -124,7 +124,7 @@ $(document).ready(function(){
 				$('.alerts:nth-child(2)').append(html);
 				//alert(json.message);
 			}else{
-				window.location.href = "/user/local/"+json.user;
+				window.location.href = "/user/"+json.user;
 			}
 		});
 	});
