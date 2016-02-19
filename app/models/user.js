@@ -9,7 +9,7 @@ var userSchema = new Schema({
 
     local            : {
         id           : String,
-        email         : String,
+        email        : String,
         username     : String,
         password     : String,
         nombres      : String,
@@ -42,10 +42,7 @@ var userSchema = new Schema({
     _id              : String,
     names            : String,
     picture          : String,
-    draws            : [], //ids de diagramas propios
-    shareds          :[] //ids de diagramas que me han compartido
-
-
+    diagrams         : [{type: Schema.Types.ObjectId, ref: 'Diagram'}]
 },{_id : false});
 
 // methods ======================
@@ -59,5 +56,6 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-// create the model for emails and expose it to our app
+
+
 module.exports = mongoose.model('User', userSchema);

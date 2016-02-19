@@ -40,7 +40,6 @@ module.exports = function (app) {
         if (!user){
           //console.log("Se esta redireccionando");
           return res.json({message: req.flash('loginMessage')});
-          //return res.redirect('/index');//res.send({message: req.flash('loginMessage')});
         }
         req.logIn (user, function(err) {
           if (err) return next(err);

@@ -1,7 +1,8 @@
 $(document).ready(function(){
 $('#relizq').hide();
 $('#relder').hide();
-newGraph=new joint.dia.Graph();
+var newGraph = new joint.dia.Graph();
+
 newGraph.on('change:position', function(cell) {
       var parentId = cell.get('parent');
       if (!parentId) return;
@@ -31,6 +32,7 @@ newGraph.on('change:position', function(cell) {
       }
     })
     linkdef.set('router', { name: 'orthogonal' });
+
 		var paper = new joint.dia.Paper({
         el: $('#paper'),
         width: $('#paper').width(),
@@ -40,18 +42,25 @@ newGraph.on('change:position', function(cell) {
         defaultLink: linkdef,
         snapLinks: { radius: 75 }
     });
+
+    //var commandManager = new joint.dia.CommandManager({ graph: newGraph });
+
+    // $('#undo-button').click(function() { commandManager.undo(); });
+    // $('#redo-button').click(function() { commandManager.redo(); });
+
 		paper.on('blank:pointerdblclick', function(evt, x, y) {
       //$("#live-modal").modal('toggle');
     	//$('#createEntity').click(function(){
         createRect(/*titleEntity.value,*/x,y);
 
     //});
-});
+    });
 
     paper.on('blank:pointerdown',function(evt, x, y) {
       $('#relizq').hide();
       $('#relder').hide();
-});
+    });
+
     var selected;
     var selView;
     var selectedLink;
@@ -107,12 +116,17 @@ newGraph.on('change:position', function(cell) {
         $('#du').click(function(){
           if (selectedLink) selectedLink.attr({'.marker-target':una});
         });
-    $('#removeEntity').click(function(){
-      if (selected) selected.remove();
-});
+
+        $("body").keypress(function(event) {
+          console.log("click");
+          if (event.which == 0 || event.which == 8){
+            event.preventDefault();
+            if(selected) selected.remove();
+          }
+        });
+
 
 function createRect(x,y){/*name,*/
-
 	 var rect = new joint.shapes.devs.Model({
       position: { x: x, y: y },
       size: { width: 119, height: 99 },
@@ -197,6 +211,7 @@ function download_pdf(name, dataUriString) {
 }
 
 var fileName =  'diagrama.json'; // You can use the .txt extension if you want
+
  function downloadAsJson(filename) {
      var json=JSON.stringify(newGraph);
     mimeType ='application/json';
@@ -205,28 +220,24 @@ var fileName =  'diagrama.json'; // You can use the .txt extension if you want
 
  }
 
-
 $("#btnGuardar").click(function(event) {
   var json=JSON.stringify(newGraph);
-  var idD= idDiagrama.innerHTML;
     console.log(txtNombreDiagrama.value);
-    console.log("imprimir id de Diagrama: ")
-    console.log(idD);
     if (txtNombreDiagrama.value==""){
-      alert("ingrese un nombre para el diagrama primero");
+      alert("Ingrese un nombre de Diagrama");
+      return;
     }
     else{
-      if(idD==""){
         var request = $.ajax({
           method: "POST",
           url: "/save",
-          //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-         data: {svg: json,
-          dname:txtNombreDiagrama.value,dId:""}
+          data: {
+           svg: json,
+           name:txtNombreDiagrama.value
+         }
         })
         .done(function(result) {
-          alert(result.message/*"done"*/);
-          idDiagrama.innerHTML=result.idDiagram;
+          alert(result.mensaje);
         })
         .fail(function() {
           console.log("error");
@@ -234,29 +245,7 @@ $("#btnGuardar").click(function(event) {
         .always(function() {
           console.log("complete");
         });
-      }
-      else{
-        console.log("entor al else cliente")
-        var request = $.ajax({
-          method: "POST",
-          url: "/save",
-          //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-         data: {svg: json,
-          dname:txtNombreDiagrama.value,dId:idD}
-        })
-        .done(function(result) {
-          alert(result.message/*"done"*/);
-          idDiagrama.innerHTML=result.idDiagram;
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-        });
-      }
     }
-
   });
 
 

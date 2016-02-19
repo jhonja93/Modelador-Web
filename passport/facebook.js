@@ -36,7 +36,7 @@ module.exports = function(passport) {
 		            		user.facebook.name 		   = profile.name.givenName;
 		            		user.facebook.lastName 	 = profile.name.familyName;
 		            		user.facebook.picture 	 = 'http://graph.facebook.com/' + profile.id + '/picture';
-		            		user.facebook.email 	   = profile.emails[0].value;
+                    if (profile.emails)  {user.facebook.email = profile.emails[0].value;}
 
 		            		user.save(function(err){
 		            			if(err)
@@ -51,6 +51,7 @@ module.exports = function(passport) {
 		                // if there is no user found with that facebook id, create them
 		                var newUser = new User();
 
+                    console.log("IMPRIMIENDO PROFILE: " + profile.emails);
 						// set all of the facebook information in our user model
 		                newUser._id               = profile.id;
                     newUser.names             = profile.name.givenName +" "+ profile.name.familyName;
@@ -61,7 +62,7 @@ module.exports = function(passport) {
 		                newUser.facebook.name  		= profile.name.givenName;
 		                newUser.facebook.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
 		                newUser.facebook.picture 	= 'http://graph.facebook.com/' + profile.id + '/picture';
-		                newUser.facebook.email 		= profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                    if (profile.emails)  {user.facebook.email = profile.emails[0].value;}
 
 						// save our user to the database
 		                newUser.save(function(err) {

@@ -1,19 +1,29 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
-
-// define the schema for our email model
 var Schema = mongoose.Schema;
+var User  = require('./user');
 var diagramSchema = new Schema({
-    jdiagram:   String,
-    name:       String,
-    owner:      String,
-    parent:     String,
-    sharedWith: [],
-    date:       {type: Date, default:Date.now},
-    _id:        String
-},{_id : false});
+  _creator      : {type: String, ref: 'User'},
+  diagram       : String,
+  name          : {type: String, required: true, unique: true},
+  date          : {type: Date, default:Date.now},
+  colaboradores : [{type: Schema.Types.ObjectId, ref: 'User'}]
+});
 
-
+// .pre("save", true, function(next, done) {
+//   var self = this;
+//   mongoose.models["Diagram"].findOne({_creator : self._creator, name : self.name}, function(err, result) {
+//     if(err){
+//       done(err);
+//     } else if (result) {
+//       //self.invalidate("name", "Nombre de diagrama ya existe");
+//       console.log(result.name);
+//       //result.diagram = self.diagram;
+//       console.log("Diagrama Actualizado");
+//     }
+//   });
+//   next();
+//   setTimeout(done, 100);
+// });
 // create the model for emails and expose it to our app
 module.exports = mongoose.model('Diagram', diagramSchema);
 
