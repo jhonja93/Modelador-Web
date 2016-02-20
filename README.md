@@ -7,8 +7,12 @@ Draw-ER is an Entity-Relationship drawer, you can work in real time with many us
 * 0.1
 ---------------------------------
 ###How To Install (dev mode)
-*  npm install
+You must have already installed MongoDB in your computer.
+Linux: 
+Visit https://docs.mongodb.org/manual/administration/install-on-linux/
+
 *  npm install -g bower
+*  npm install
 *  bower install
 *  gulp
 *  open browser on 127.0.0.1:3000
