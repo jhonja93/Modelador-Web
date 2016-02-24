@@ -35,10 +35,15 @@ module.exports = function (app) {
 		//var dir = loc.substring(0, loc.lastIndexOf('/'));
 		var id = req.session.Userid;
 		var file = __dirname+'/tmp/'+id+'/'+req.body.name+'.json';
-		jsonfile.writeFile(file, req.body.svg, (err) => {
-		  if (err) console.log(err);
-		  else console.log('It\'s saved!');
+		var obj = req.body.svg;
+		fs.writeFile(file, obj, function (err){
+			if(err) return console.log(err);
+			console.log('It\'s saved');
 		});
+		//jsonfile.writeFile(file, req.body.svg, (err) => {
+		//   if (err) console.log(err);
+		//   else console.log('It\'s saved!');
+		// });
 		console.log(id);
 
 		var newDiagram = new Diagram({

@@ -12,7 +12,7 @@ function verImagen(){
 }
 
 function initialize(){
-    document.getElementById('btnImage').addEventListener('click', verImagen, false);
+    //document.getElementById('btnImage').addEventListener('click', verImagen, false);
 }
 
 window.addEventListener('load', initialize, false);
