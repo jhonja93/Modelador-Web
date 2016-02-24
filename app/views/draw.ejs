@@ -1,6 +1,5 @@
- <!DOCTYPE html>
-<html lang="es">
-
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,6 +78,7 @@
                   <li><button type="button" href="#" id="redo-button" class="btn btn-default" style="background-color: rgb(38, 230, 33); color: white"><span class="glyphicons glyphicons-redo"></span></span> Redo</button></li>
                   <li><button id="btnShare" type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#modalSearch"><span class="glyphicon glyphicon-share"></span> Share</button></li>
                   <li><button id="btnGuardar" class="btn btn-primary" type="button" href="#"><span class="glyphicon glyphicon-save"></span> Save</button></li>
+                  <li><button id="btnImage" class="btn btn-default btn-success btn-block"><span></span> Image</button></li>
                 </ul>
 
                 <ul class="navbar-name navbar-right">
@@ -119,6 +119,8 @@
           </div>
 
           <div class="row column viewport-container">
+            <canvas id="canvas" width="300px" height="300px" style="display:none"></canvas>
+            <div class="chart"></div>
             <div id="paper" class="board full col-md-10 col-md-offset-1">
 
             </div>
@@ -138,8 +140,15 @@
     <script src="/components/bootstrap-list-filter/bootstrap-list-filter.src.js"></script>
     <!-- <script src="joint.dia.command.js" type="text/javascript" ></script> -->
     <script src="js/saveSvgAsPng.js"></script>
+    <script src="js/Canvas2Image.js"></script>
     <script src="js/jspdf.debug.js"></script>
     <script src="js/graphicsjoint.js"></script>
+
+    <script type="text/javascript" src="http://gabelerner.github.io/canvg/rgbcolor.js"></script>
+    <script type="text/javascript" src="http://gabelerner.github.io/canvg/StackBlur.js"></script>
+    <script type="text/javascript" src="http://gabelerner.github.io/canvg/canvg.js"></script>
+
+    <script src="js/draw.js"></script>
 
   </body>
 </html>

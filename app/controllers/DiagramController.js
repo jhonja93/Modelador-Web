@@ -2,27 +2,50 @@ var express = require('express');
 var router 	= express.Router();
 var User 	= mongoose.model('User');
 var Diagram = require('../models/diagram');
+var jsonfile = require('jsonfile');
+var fs = require('fs');
+
 
 module.exports = function (app) {
 
-	app.get('/usuarios', function(req, res){
+	app.get('/diagrams', function(req, res){
 		console.log('obteniendo todos los diagramas de: ' + req.session.Userid);
-		User.findById(req.session.Userid)
-		.exec(function(err, diagramas){
+		Diagram.find({'createdBy': req.session.Userid}).
+		 exec(function(err, diagramas){
 			if(err){res.send('error has ococured');}
 			else{
-				console.log(diagramas);
+				//console.log(diagramas);
 				res.json(diagramas);
 			}
 		});
 	});
 
+	app.delete('/diagram/:name', function(req, res){
+    Diagram.findOneAndRemove({
+      name: req.params.name
+    }, function(err, diagram){
+      if(err){console.log("error :( ");}
+      else{res.status(204);}
+    });
+  });
+
+
 	app.post('/save', function(req, res){
-		console.log(req.session.Userid);
+		//var loc = window.location.pathname;
+		//var dir = loc.substring(0, loc.lastIndexOf('/'));
+		var id = req.session.Userid;
+		var file = __dirname+'/tmp/'+id+'/'+req.body.name+'.json';
+		jsonfile.writeFile(file, req.body.svg, (err) => {
+		  if (err) console.log(err);
+		  else console.log('It\'s saved!');
+		});
+		console.log(id);
+
 		var newDiagram = new Diagram({
-			name		: req.body.name,
-			diagram	: req.body.svg,
-			_creator: req.session.Userid
+			name					: req.body.name,
+			createdBy 		: id,
+			diagram				: file,
+			colaboradores : [id]
 		});
 
 		newDiagram.save(function(err) {

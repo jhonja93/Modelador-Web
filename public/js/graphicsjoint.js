@@ -40,7 +40,8 @@ newGraph.on('change:position', function(cell) {
         model: newGraph,
         gridSize: 1,
         defaultLink: linkdef,
-        snapLinks: { radius: 75 }
+        snapLinks: { radius: 75 },
+        linkConnectionPoint: joint.util.shapePerimeterConnectionPoint
     });
 
     //var commandManager = new joint.dia.CommandManager({ graph: newGraph });
@@ -125,20 +126,23 @@ newGraph.on('change:position', function(cell) {
           }
         });
 
+var cont = 0;
 
 function createRect(x,y){/*name,*/
+
 	 var rect = new joint.shapes.devs.Model({
       position: { x: x, y: y },
       size: { width: 119, height: 99 },
       inPorts: ['','',''],
       outPorts: ['','',''],
       attrs: { rect: { fill: 'white' },
-      '.label':{text:'hola :)'},
+      '.label':{text:'Entidad ' + cont},
        '.inPorts circle': { fill: '#16A085' },
        '.outPorts circle': { fill: '#16A085' }
      }
    });
 
+   cont++;
 
    var rectTitle = new joint.shapes.basic.Rect({
        position: { x: x, y: y },
@@ -212,16 +216,17 @@ function download_pdf(name, dataUriString) {
 
 var fileName =  'diagrama.json'; // You can use the .txt extension if you want
 
- function downloadAsJson(filename) {
-     var json=JSON.stringify(newGraph);
-    mimeType ='application/json';
-     downloadJson.setAttribute('download', filename);
-     downloadJson.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(json));
+function downloadAsJson(filename) {
 
- }
+   var json= JSON.stringify(newGraph.toJSON()); //JSON.stringify(newGraph);
+   mimeType ='application/json';
+   downloadJson.setAttribute('download', filename);
+   downloadJson.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(json));
+
+}
 
 $("#btnGuardar").click(function(event) {
-  var json=JSON.stringify(newGraph);
+  var json=JSON.stringify(newGraph.toJSON());
     console.log(txtNombreDiagrama.value);
     if (txtNombreDiagrama.value==""){
       alert("Ingrese un nombre de Diagrama");
@@ -249,13 +254,13 @@ $("#btnGuardar").click(function(event) {
   });
 
 
-$('#downloadJson').click(function(){
-    downloadAsJson(fileName);
-});
-$('#downloadPdf').click(function(){
-    // downloadAsPDF(fileName);
-    svg_to_pdf(document.querySelector("svg"), function (pdf) {
-                download_pdf('SVG.pdf', pdf.output('dataurlstring'));
-            });
-});
+  $('#downloadJson').click(function(){
+      downloadAsJson(fileName);
+  });
+  $('#downloadPdf').click(function(){
+      // downloadAsPDF(fileName);
+      svg_to_pdf(document.querySelector("svg"), function (pdf) {
+                  download_pdf('SVG.pdf', pdf.output('dataurlstring'));
+              });
+  });
 });

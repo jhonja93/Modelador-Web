@@ -41,8 +41,7 @@ var userSchema = new Schema({
     },
     _id              : String,
     names            : String,
-    picture          : String,
-    diagrams         : [{type: Schema.Types.ObjectId, ref: 'Diagram'}]
+    picture          : String
 },{_id : false});
 
 // methods ======================
